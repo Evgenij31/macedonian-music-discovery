@@ -1,0 +1,20 @@
+/* https://coolors.co/86cb92-71b48d-404e7c-251f47-260f26 */
+
+:root {
+  --color-1: #86cb92;
+  --color-2: #71b48d;
+  --color-3: #404e7c;
+  --color-4: #251f47;
+  --color-5: #260f26;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--color-3);
+  color: rgb(245, 245, 245);
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Toše Proeski",
+    "genre": "Pop",
+    "decade": "2000s",
+    "region": "Kruševo",
+    "image": "https://via.placeholder.com/150"
+  },
+  {
+    "id": 2,
+    "name": "Leb i Sol",
+    "genre": "Rock",
+    "decade": "1980s",
+    "region": "Skopje",
+    "image": "https://via.placeholder.com/150"
+  },
+  {
+    "id": 3,
+    "name": "Esma Redžepova",
+    "genre": "Traditional",
+    "decade": "1970s",
+    "region": "Skopje",
+    "image": "https://via.placeholder.com/150"
+  }
+]
