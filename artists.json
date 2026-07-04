@@ -22,5 +22,13 @@
     "decade": "1970s",
     "region": "Skopje",
     "image": "static/images/person-placeholder.png"
+  },
+  {
+    "id": 4,
+    "name": "Duper",
+    "genre": "Pop",
+    "decade": "2000s",
+    "region": "Skopje",
+    "image": "static/images/person-placeholder.png"
   }
 ]
