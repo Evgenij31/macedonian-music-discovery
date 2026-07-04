@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About | Macedonian Music Discovery</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+  </head>
+  <body class="about-page">
+    {% include "partials/navbar.html" %}
+
+    <main class="about-shell">
+      <section class="about-hero">
+        <div class="about-hero-copy">
+          <p class="eyebrow">Web Design Basics project</p>
+          <h1>Macedonian Music Discovery</h1>
+          <p class="lead">
+            A project idea shaped by my second-semester experience at FINKI and
+            the opportunity to build a practical web app instead of the second
+            midterm exam.
+          </p>
+        </div>
+        <div class="about-hero-card">
+          <h2>My context</h2>
+          <p>
+            I am a student at FINKI, in the second semester of the first year of
+            my Bachelor's degree in Application of Information Technologies
+            (Примена на информациски технологии). After scoring highly on the
+            first midterm, I qualified for the project-based option for the
+            second midterm.
+          </p>
+        </div>
+      </section>
+
+      <section class="about-grid">
+        <article class="about-card">
+          <h2>Project idea</h2>
+          <p>
+            The assigned topic was Macedonian Music Discovery: a browser for
+            Macedonian artists with filters by genre, decade, and region, plus
+            AI-generated hover descriptions to help users explore music more
+            easily.
+          </p>
+        </article>
+
+        <article class="about-card">
+          <h2>Technology direction</h2>
+          <p>
+            The recommended stack for the project is HTML, CSS, JavaScript, and
+            Python. That combination gives the front end enough flexibility for
+            dynamic filtering and interaction, while Python can support the
+            smarter background logic.
+          </p>
+        </article>
+
+        <article class="about-card wide-card">
+          <h2>My point of view</h2>
+          <p>
+            I wanted to create a web application that makes discovering local
+            performers clear and enjoyable through filtering by music genre,
+            decade, and geographic region. The main focus is easy discovery of
+            new Macedonian music, supported by Python and AI in the background
+            for dynamically generating and displaying artist descriptions. The
+            interface is planned as a modern, responsive card-based design,
+            where content loads dynamically without page refreshes. Beyond AI
+            descriptions, each artist profile will also include a basic
+            discography, links to official streaming platforms such as Spotify
+            and YouTube, and recommendations for similar local artists to round
+            out the user experience. I also plan to add personalization so the
+            application can suggest content based on preferred genres, saved
+            favorite artists, and individual interests.
+          </p>
+        </article>
+
+        <article class="about-card">
+          <h2>Future plans</h2>
+          <p>
+            The project can grow into a more personalized music discovery tool
+            with saved favorites, tailored suggestions, and richer artist
+            profiles as the dataset expands.
+          </p>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

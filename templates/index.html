@@ -7,18 +7,95 @@
     <link rel="stylesheet" href="/static/css/style.css" />
   </head>
   <body>
-    <header>
-      <h1>Macedonian Music Discovery</h1>
-    </header>
+    {% include "partials/navbar.html" %}
 
-    <div class="main-layout">
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1>Explore the Sound of Macedonia</h1>
+        <p>
+          Discover local legendary bands and underground fresh blood across
+          generations, backed by intelligent insights.
+        </p>
+        <a href="#dashboard" class="cta-btn">Start Exploring</a>
+      </div>
+      <div class="overlay"></div>
+    </section>
+
+    <div id="dashboard" class="main-layout">
       <aside class="sidebar">
-        <h3>Filters</h3>
-        <p>Filters will go here...</p>
+        <div class="search-box">
+          <input
+            type="text"
+            id="artist-search"
+            placeholder="Search artist name..."
+          />
+        </div>
+
+        <div class="filter-group">
+          <h3>Genre</h3>
+          <label
+            ><input type="checkbox" name="genre" value="Rock" /> Rock</label
+          >
+          <label><input type="checkbox" name="genre" value="Pop" /> Pop</label>
+          <label
+            ><input type="checkbox" name="genre" value="Hip-Hop" />
+            Hip-Hop</label
+          >
+          <label
+            ><input type="checkbox" name="genre" value="Alternative" />
+            Alternative</label
+          >
+        </div>
+
+        <div class="filter-group">
+          <h3>Decade</h3>
+          <label
+            ><input type="checkbox" name="decade" value="1980s" /> 1980s</label
+          >
+          <label
+            ><input type="checkbox" name="decade" value="1990s" /> 1990s</label
+          >
+          <label
+            ><input type="checkbox" name="decade" value="2000s" /> 2000s</label
+          >
+          <label
+            ><input type="checkbox" name="decade" value="2010s" /> 2010s</label
+          >
+          <label
+            ><input type="checkbox" name="decade" value="2020s" /> 2020s</label
+          >
+        </div>
+
+        <div class="filter-group">
+          <h3>Region</h3>
+          <label
+            ><input type="checkbox" name="region" value="Skopje" />
+            Skopje</label
+          >
+          <label
+            ><input type="checkbox" name="region" value="Bitola" />
+            Bitola</label
+          >
+          <label
+            ><input type="checkbox" name="region" value="Prilep" />
+            Prilep</label
+          >
+          <label
+            ><input type="checkbox" name="region" value="Kumanovo" />
+            Kumanovo</label
+          >
+        </div>
       </aside>
 
-      <main class="artist-grid">
-        <p>Loading artists...</p>
+      <main class="content-area">
+        <div class="active-tags-bar">
+          <span>Active Filters: None</span>
+          <button class="clear-btn">Clear All</button>
+        </div>
+
+        <section class="artist-grid">
+          <p class="status-msg">Loading artists...</p>
+        </section>
       </main>
     </div>
 

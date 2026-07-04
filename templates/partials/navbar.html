@@ -1,0 +1,18 @@
+<header class="app-header">
+  <div class="header-container">
+    <a href="#" class="logo">Listen<span>MK</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="/" class="{{ 'active' if active_page == 'home' else '' }}"
+        >Discover</a
+      >
+      <a href="/about" class="{{ 'active' if active_page == 'about' else '' }}"
+        >About</a
+      >
+      <a
+        href="/favorites"
+        class="{{ 'active' if active_page == 'favorites' else '' }}"
+        >Favorites</a
+      >
+    </nav>
+  </div>
+</header>

@@ -8,7 +8,15 @@ app = Flask(__name__)
 # Route to serve main HTML page
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template("index.html", active_page="home")
+
+@app.route("/about")
+def about():
+    return render_template("about.html", active_page="about")
+
+@app.route("/favorites")
+def favorites():
+    return render_template("favorites.html", active_page="favorites")
 
 
 # Route to serve artist data as an API endpoint

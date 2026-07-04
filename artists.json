@@ -5,7 +5,7 @@
     "genre": "Pop",
     "decade": "2000s",
     "region": "Kruševo",
-    "image": "https://via.placeholder.com/150"
+    "image": "static/images/person-placeholder.png"
   },
   {
     "id": 2,
@@ -13,7 +13,7 @@
     "genre": "Rock",
     "decade": "1980s",
     "region": "Skopje",
-    "image": "https://via.placeholder.com/150"
+    "image": "static/images/person-placeholder.png"
   },
   {
     "id": 3,
@@ -21,6 +21,6 @@
     "genre": "Traditional",
     "decade": "1970s",
     "region": "Skopje",
-    "image": "https://via.placeholder.com/150"
+    "image": "static/images/person-placeholder.png"
   }
 ]

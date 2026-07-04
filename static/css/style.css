@@ -1,20 +1,370 @@
-/* https://coolors.co/86cb92-71b48d-404e7c-251f47-260f26 */
-
+/* Color Palette System: Deep Slate & Electric Cyan */
 :root {
-  --color-1: #86cb92;
-  --color-2: #71b48d;
-  --color-3: #404e7c;
-  --color-4: #251f47;
-  --color-5: #260f26;
+  --deep-void: #0b132b;
+  /* Main application background (Deepest Navy) */
+  --dark-purple: #1c2541;
+  /* Sidebar and Card backgrounds (Rich Slate) */
+  --indigo-muted: #3a506b;
+  /* Component borders and divider lines */
+  --mint-dark: #5bc0be;
+  /* Secondary accents and primary CTAs (Electric Teal) */
+  --mint-light: #6fffe9;
+  /* Highlights, hover effects, and crisp accents (Neon Cyan) */
+  --text-light: #f8fafc;
+  /* Clean, readable off-white text */
+  --dark-purple-transparent: #0b132b95;
 }
 
 * {
-  padding: 0;
+  box-sizing: border-box;
   margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: var(--color-3);
-  color: rgb(245, 245, 245);
+  background-color: var(--deep-void);
+  color: var(--text-light);
+  scroll-behavior: smooth;
+}
+
+.about-page {
+  background:
+    radial-gradient(circle at top left, rgba(111, 255, 233, 0.14), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(91, 188, 190, 0.12), transparent 28%),
+    var(--deep-void);
+}
+
+/* Header & Nav */
+.app-header {
+  background-color: var(--dark-purple-transparent);
+  border-bottom: 1px solid var(--indigo-muted);
+  padding: 1.2rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.logo span {
+  color: var(--mint-light);
+}
+
+.nav-links a {
+  color: var(--text-light);
+  text-decoration: none;
+  margin-left: 1.5rem;
+  transition: color 0.3s;
+}
+
+.nav-links a.active,
+.nav-links a:hover {
+  color: var(--mint-light);
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, var(--deep-void) 0%, var(--dark-purple) 100%);
+  /* padding: 6rem 2rem; */
+  text-align: center;
+  border-bottom: 1px solid var(--indigo-muted);
+  background-image: url('../images/concert-bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-section .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 107vh;
+  background-color: rgba(11, 19, 43, 0.7);
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--mint-light);
+}
+
+.hero-content p {
+  font-size: 1.25rem;
+  max-width: 600px;
+  margin: 0 auto 2rem auto;
+  opacity: 0.8;
+  color: var(--text-light);
+}
+
+.cta-btn {
+  display: inline-block;
+  background-color: var(--mint-dark);
+  color: var(--deep-void);
+  padding: 0.8rem 2rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.cta-btn:hover {
+  background-color: var(--mint-light);
+  transform: translateY(-2px);
+}
+
+/* Macro Layout: Sidebar + Content Feed using CSS Grid */
+.main-layout {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2rem;
+}
+
+/* Sidebar Styling */
+.sidebar {
+  background-color: var(--dark-purple-transparent);
+  padding: 1.5rem;
+  border-radius: 12px;
+  height: fit-content;
+  border: 1px solid var(--indigo-muted);
+}
+
+.search-box input {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 6px;
+  border: 1px solid var(--indigo-muted);
+  background-color: var(--deep-void);
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+}
+
+.filter-group {
+  margin-bottom: 1.5rem;
+}
+
+.filter-group h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--mint-light);
+  border-bottom: 1px solid var(--indigo-muted);
+  padding-bottom: 0.3rem;
+}
+
+.filter-group label {
+  display: block;
+  margin-bottom: 0.4rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+/* Feed & Grid Layout */
+.content-area {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.active-tags-bar {
+  background-color: var(--dark-purple);
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.clear-btn {
+  background: transparent;
+  border: 1px solid var(--mint-light);
+  color: var(--mint-light);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Responsive Micro Layout: Artist Cards Grid */
+.artist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Semantic Artist Cards with Hover Interactions */
+.artist-card {
+  background-color: var(--dark-purple);
+  border: 1px solid var(--indigo-muted);
+  border-radius: 8px;
+  padding: 1rem;
+  position: relative;
+  /* Crucial for absolute positioned AI hover overlay later */
+  overflow: hidden;
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.artist-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--mint-light);
+}
+
+.artist-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 0.8rem;
+}
+
+.artist-card h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.artist-card p {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-bottom: 0.2rem;
+}
+
+.status-msg {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2rem;
+  opacity: 0.6;
+}
+
+/* About page */
+.about-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 1rem 4rem;
+}
+
+.about-hero {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 1.5rem;
+  align-items: stretch;
+  margin-bottom: 1.5rem;
+}
+
+.about-hero-copy,
+.about-hero-card,
+.about-card {
+  background: linear-gradient(180deg, rgba(28, 37, 65, 0.92), rgba(11, 19, 43, 0.92));
+  border: 1px solid rgba(111, 255, 233, 0.18);
+  border-radius: 20px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+}
+
+.about-hero-copy {
+  padding: 2.25rem;
+}
+
+.about-hero-card {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  color: var(--mint-light);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.8rem;
+}
+
+.about-hero h1 {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.lead {
+  max-width: 62ch;
+  color: rgba(248, 250, 252, 0.84);
+  font-size: 1.08rem;
+  line-height: 1.75;
+}
+
+.about-hero-card h2,
+.about-card h2 {
+  color: var(--mint-light);
+  font-size: 1.1rem;
+  margin-bottom: 0.85rem;
+}
+
+.about-hero-card p,
+.about-card p {
+  color: rgba(248, 250, 252, 0.82);
+  line-height: 1.8;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.about-card {
+  padding: 1.5rem;
+}
+
+.wide-card {
+  grid-column: 1 / -1;
+}
+
+/* Responsive Breakpoint for Mobile devices */
+@media (max-width: 768px) {
+  .main-layout {
+    grid-template-columns: 1fr;
+    /* Sidebar stacks above the grid */
+  }
+
+  .about-hero,
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wide-card {
+    grid-column: auto;
+  }
 }
