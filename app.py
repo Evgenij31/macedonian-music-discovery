@@ -18,6 +18,13 @@ db.init_app(app)
 # 3. Safe to import models now since models no longer imports app.py!
 from models import Artist 
 
+# --- LIVE SERVER SETUP ---
+# This runs when PythonAnywhere imports the app, ensuring directories and tables exist
+with app.app_context():
+    os.makedirs(os.path.join(BASE_DIR, 'instance'), exist_ok=True)
+    db.create_all()
+# -------------------------
+
 # Route to serve main HTML page
 @app.route("/")
 def home():
@@ -53,8 +60,5 @@ def get_artists():
         return jsonify({"error": "Could not fetch artists from database"}), 500
     
 if __name__ == "__main__":
-    with app.app_context():
-        os.makedirs(os.path.join(BASE_DIR, 'instance'), exist_ok=True)
-        db.create_all()
-        
+    # This block only runs during local development (python app.py)
     app.run(debug=True, port=5000)
