@@ -19,10 +19,34 @@ db.init_app(app)
 from models import Artist 
 
 # --- LIVE SERVER SETUP ---
-# This runs when PythonAnywhere imports the app, ensuring directories and tables exist
+# This runs when PythonAnywhere imports the app, ensuring directories, tables, and data exist
 with app.app_context():
     os.makedirs(os.path.join(BASE_DIR, 'instance'), exist_ok=True)
     db.create_all()
+    
+    # Check if the database is empty. If it is, seed it using artists.json
+    if Artist.query.count() == 0:
+        json_path = os.path.join(BASE_DIR, "artists.json")
+        if os.path.exists(json_path):
+            try:
+                with open(json_path, "r", encoding="utf-8") as file:
+                    artists_data = json.load(file)
+                    
+                for data in artists_data:
+                    new_artist = Artist(
+                        name=data.get("name"),
+                        genre=data.get("genre"),
+                        decade=data.get("decade"),
+                        region=data.get("region"),
+                        image_url=data.get("image"),  # Maps 'image' from JSON to 'image_url' in DB
+                        description=data.get("description", "")
+                    )
+                    db.session.add(new_artist)
+                db.session.commit()
+                print("Database successfully seeded with artists.json data!")
+            except Exception as seeding_error:
+                db.session.rollback()
+                print(f"Error seeding database: {seeding_error}")
 # -------------------------
 
 # Route to serve main HTML page
