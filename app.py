@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, send_file
 import os
 import json
 
@@ -61,6 +61,14 @@ def about():
 @app.route("/favorites")
 def favorites():
     return render_template("favorites.html", active_page="favorites")
+
+
+@app.route("/favicon.ico")
+def favicon():
+    return send_file(
+        os.path.join(BASE_DIR, "static", "images", "favicon.png"),
+        mimetype="image/png",
+    )
 
 # Route to serve artist data as an API endpoint
 @app.route("/api/artists")
