@@ -5,7 +5,7 @@
     "genre": "Pop",
     "decade": "2000s",
     "region": "Kruševo",
-    "image": "static/images/person-placeholder.png"
+    "image": "static/images/artists/tose-proeski.jpg"
   },
   {
     "id": 2,
@@ -13,7 +13,7 @@
     "genre": "Rock",
     "decade": "1980s",
     "region": "Skopje",
-    "image": "static/images/person-placeholder.png"
+    "image": "static/images/artists/leb-i-sol.jpg"
   },
   {
     "id": 3,
@@ -21,7 +21,7 @@
     "genre": "Traditional",
     "decade": "1970s",
     "region": "Skopje",
-    "image": "static/images/person-placeholder.png"
+    "image": "static/images/artists/esma-redzepova.jpg"
   },
   {
     "id": 4,
@@ -29,6 +29,6 @@
     "genre": "Pop",
     "decade": "2000s",
     "region": "Skopje",
-    "image": "static/images/person-placeholder.png"
+    "image": "static/images/artists/duper-grupa.jpg"
   }
 ]
