@@ -1,6 +1,7 @@
 from flask import Flask, render_template, jsonify, send_file
 import os
 import json
+from sqlalchemy import inspect, text
 
 # 1. Import db from the extensions file
 from extensions import db 
@@ -18,11 +19,32 @@ db.init_app(app)
 # 3. Safe to import models now since models no longer imports app.py!
 from models import Artist 
 
+
+def sync_artist_table_schema():
+    """Add any missing Artist columns to an existing SQLite table."""
+    inspector = inspect(db.engine)
+    existing_columns = {column["name"] for column in inspector.get_columns("artists")}
+
+    missing_columns = [
+        column for column in Artist.__table__.columns if column.name not in existing_columns
+    ]
+
+    if not missing_columns:
+        return
+
+    with db.engine.begin() as connection:
+        for column in missing_columns:
+            column_type = column.type.compile(dialect=db.engine.dialect)
+            connection.execute(
+                text(f'ALTER TABLE artists ADD COLUMN "{column.name}" {column_type}')
+            )
+
 # --- LIVE SERVER SETUP ---
 # This runs when PythonAnywhere imports the app, ensuring directories, tables, and data exist
 with app.app_context():
     os.makedirs(os.path.join(BASE_DIR, 'instance'), exist_ok=True)
     db.create_all()
+    sync_artist_table_schema()
     
     # Check if the database is empty. If it is, seed it using artists.json
     if Artist.query.count() == 0:
@@ -39,7 +61,9 @@ with app.app_context():
                         decade=data.get("decade"),
                         region=data.get("region"),
                         image_url=data.get("image"),  # Maps 'image' from JSON to 'image_url' in DB
-                        description=data.get("description", "")
+                        description=data.get("description", ""),
+                        spotify_artist_id=data.get("spotify_artist_id"),
+                        spotify_link=data.get("spotify_link")
                     )
                     db.session.add(new_artist)
                 db.session.commit()
@@ -62,6 +86,10 @@ def about():
 def favorites():
     return render_template("favorites.html", active_page="favorites")
 
+@app.route("/artist/<int:artist_id>")
+def artist(artist_id):
+    artist = Artist.query.get_or_404(artist_id)
+    return render_template("artist.html", artist=artist, active_page="artist")
 
 @app.route("/favicon.ico")
 def favicon():

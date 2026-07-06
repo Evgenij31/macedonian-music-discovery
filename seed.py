@@ -32,7 +32,9 @@ def seed_database():
                 decade=item.get("decade"),
                 region=item.get("region"),
                 image_url=item.get("image"),  # Maps JSON "image" -> DB "image_url"
-                description="AI description coming soon..."  # Placeholder for the AI feature
+                description="AI description coming soon...",  # Placeholder for the AI feature
+                spotify_artist_id=item.get("spotify_artist_id"),
+                spotify_link=item.get("spotify_link")
             )
             db.session.add(new_artist)
         

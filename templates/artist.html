@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Artist | Macedonian Music Discovery</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+  </head>
+
+  <body class="artist-page">
+    {% include "partials/navbar.html" %} {% set artist_image = artist.image_url
+    | replace('static/', '') if artist.image_url else
+    'images/person-placeholder.png' %}
+
+    <main class="artist-shell">
+      <section class="artist-hero" aria-labelledby="artist-name">
+        <div class="artist-media">
+          <img
+            src="{{ url_for('static', filename=artist_image) }}"
+            alt="{{ artist.name }} portrait"
+            loading="eager"
+          />
+        </div>
+
+        <div class="artist-copy">
+          <p class="eyebrow">Artist profile</p>
+          <h1 id="artist-name">{{ artist.name }}</h1>
+          <p class="artist-description">
+            {{ artist.description or "A biography has not been added for this
+            artist yet." }}
+          </p>
+
+          <dl class="artist-meta" aria-label="Artist details">
+            <div>
+              <dt>Genre</dt>
+              <dd>{{ artist.genre }}</dd>
+            </div>
+            <div>
+              <dt>Decade</dt>
+              <dd>{{ artist.decade }}</dd>
+            </div>
+            <div>
+              <dt>Region</dt>
+              <dd>{{ artist.region }}</dd>
+            </div>
+          </dl>
+        </div>
+
+        <iframe
+          data-testid="embed-iframe"
+          style="border-radius: 12px"
+          src="https://open.spotify.com/embed/artist/{{ artist.spotify_artist_id }}?utm_source=generator&theme=0&si=5cff2c98cd0a45de"
+          width="100%"
+          height="352"
+          frameborder="0"
+          allowfullscreen=""
+          allow="
+            autoplay;
+            clipboard-write;
+            encrypted-media;
+            fullscreen;
+            picture-in-picture;
+          "
+          loading="lazy"
+        ></iframe>
+
+        <button class="artist-back-link" onclick="history.back()">
+          Back to discovery
+        </button>
+      </section>
+    </main>
+  </body>
+</html>

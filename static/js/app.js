@@ -104,11 +104,13 @@ document.addEventListener("DOMContentLoaded", () => {
             card.classList.add("artist-card");
 
             card.innerHTML = `
+            <a href="../artist/${artist.id}" target="_self" rel="noopener noreferrer">
                 <img src="${artist.image}" alt="${artist.name}">
                 <h2>${artist.name}</h2>
                 <p><strong>Genre:</strong> ${artist.genre}</p>
                 <p><strong>Decade:</strong> ${artist.decade}</p>
                 <p><strong>Region:</strong> ${artist.region}</p>
+            </a>
             `;
 
             gridContainer.appendChild(card);

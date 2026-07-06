@@ -10,6 +10,8 @@ class Artist(db.Model):
     region = db.Column(db.String(50), nullable=False)
     image_url = db.Column(db.String(255), nullable=True)
     description = db.Column(db.Text, nullable=True)  # <-- Make sure this line exists!
+    spotify_artist_id = db.Column(db.String(100), nullable=True)
+    spotify_link = db.Column(db.String(255), nullable=True)
 
     def to_dict(self):
         return {
@@ -19,5 +21,7 @@ class Artist(db.Model):
             "decade": self.decade,
             "region": self.region,
             "image_url": self.image_url,
-            "description": self.description
+            "description": self.description,
+            "spotify_artist_id": self.spotify_artist_id,
+            "spotify_link": self.spotify_link
         }

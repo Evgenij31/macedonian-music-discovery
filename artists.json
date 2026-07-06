@@ -5,7 +5,9 @@
     "genre": "Pop",
     "decade": "2000s",
     "region": "Kruševo",
-    "image": "static/images/artists/tose-proeski.jpg"
+    "image": "static/images/artists/tose-proeski.jpg",
+    "spotify_artist_id": "0JCTMGwQbfZd84M5HE0TMS",
+    "spotify_link": "https://open.spotify.com/artist/0JCTMGwQbfZd84M5HE0TMS?si=qVCms8dpRKqqx7XaepnIuA"
   },
   {
     "id": 2,
@@ -13,7 +15,9 @@
     "genre": "Rock",
     "decade": "1980s",
     "region": "Skopje",
-    "image": "static/images/artists/leb-i-sol.jpg"
+    "image": "static/images/artists/leb-i-sol.jpg",
+    "spotify_artist_id": "5hNernryMZIWE1Nrygbxp0",
+    "spotify_link": "https://open.spotify.com/artist/5hNernryMZIWE1Nrygbxp0?si=bFbPZETWSOWBNBCgx4TldA"
   },
   {
     "id": 3,
@@ -21,7 +25,9 @@
     "genre": "Traditional",
     "decade": "1970s",
     "region": "Skopje",
-    "image": "static/images/artists/esma-redzepova.jpg"
+    "image": "static/images/artists/esma-redzepova.jpg",
+    "spotify_artist_id": "3hqJ0OoW1ck5ET6lUyV0OQ",
+    "spotify_link": "https://open.spotify.com/artist/3hqJ0OoW1ck5ET6lUyV0OQ?si=3vakwntSRSGh2Fyghvt0kQ"
   },
   {
     "id": 4,
@@ -29,6 +35,18 @@
     "genre": "Pop",
     "decade": "2000s",
     "region": "Skopje",
-    "image": "static/images/artists/duper-grupa.jpg"
+    "image": "static/images/artists/duper-grupa.jpg",
+    "spotify_artist_id": "3MgabjdhjMZu4qF91PUvLw",
+    "spotify_link": "https://open.spotify.com/artist/3MgabjdhjMZu4qF91PUvLw?si=y96amQz2RNuzItssT9DDNQ"
+  },
+  {
+    "id": 5,
+    "name": "Arhangel",
+    "genre": "Rock",
+    "decade": "1990s",
+    "region": "Skopje",
+    "image": "static/images/artists/arhangel.jpg",
+    "spotify_artist_id": "7Ed6HtcARp9ahxFVxfit7o",
+    "spotify_link": "https://open.spotify.com/artist/7Ed6HtcARp9ahxFVxfit7o?si=Jb5tm7CvRPSFu__Mzie9AQ"
   }
 ]
