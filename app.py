@@ -98,6 +98,12 @@ def favicon():
         mimetype="image/png",
     )
 
+@app.route("/admin")
+def admin():
+    artists = Artist.query.order_by(Artist.name.asc()).all()
+    return render_template("admin/index.html", active_page="admin", artists=artists)
+
+
 # Route to serve artist data as an API endpoint
 @app.route("/api/artists")
 def get_artists():

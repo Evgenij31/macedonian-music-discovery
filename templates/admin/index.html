@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Macedonian Music Discovery</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+  </head>
+  <body class="admin-page">
+    {% include "partials/navbar.html" %}
+
+    <h1>Admin Dashboard</h1>
+
+    <div id="dashboard">
+      <main class="admin-content">
+        <div class="add-artist">
+          <h2>Add New Artist</h2>
+          <form id="add-artist-form" method="POST" action="/admin/add_artist">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required />
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description"></textarea>
+
+            <label for="genre">Genre:</label>
+            <input type="text" id="genre" name="genre" />
+
+            <label for="decade">Decade:</label>
+            <input type="text" id="decade" name="decade" />
+
+            <label for="region">Region:</label>
+            <input type="text" id="region" name="region" />
+
+            <label for="image_url">Image URL:</label>
+            <input type="text" id="image_url" name="image_url" />
+
+            <label for="spotify_artist_id">Spotify Artist ID:</label>
+            <input
+              type="text"
+              id="spotify_artist_id"
+              name="spotify_artist_id"
+            />
+
+            <label for="spotify_url">Spotify URL:</label>
+            <input type="text" id="spotify_url" name="spotify_url" />
+
+            <button type="submit">Add Artist</button>
+          </form>
+        </div>
+        <div class="artist-list">
+          <h2>Existing Artists</h2>
+          <p class="artist-list-help">
+            Manage the catalog below. Each entry shows the core details at a
+            glance.
+          </p>
+          <ul class="admin-artist-list">
+            {% for artist in artists %}
+            <li class="admin-artist-item">
+              <div class="admin-artist-main">
+                <strong>{{ artist.name }}</strong>
+                <div class="admin-artist-meta">
+                  <span>{{ artist.genre or "No genre" }}</span>
+                  <span>{{ artist.decade or "No decade" }}</span>
+                  <span>{{ artist.region or "No region" }}</span>
+                </div>
+              </div>
+              <form method="POST" action="/admin/delete_artist/{{ artist.id }}">
+                <button type="submit" class="delete-artist-btn">Delete</button>
+              </form>
+            </li>
+            {% else %}
+            <li class="admin-artist-empty">No artists have been added yet.</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </main>
+    </div>
+
+    <!-- <script src="/static/js/app.js"></script> -->
+  </body>
+</html>
