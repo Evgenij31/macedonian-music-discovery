@@ -48,5 +48,15 @@
     "image": "static/images/artists/arhangel.jpg",
     "spotify_artist_id": "7Ed6HtcARp9ahxFVxfit7o",
     "spotify_link": "https://open.spotify.com/artist/7Ed6HtcARp9ahxFVxfit7o?si=Jb5tm7CvRPSFu__Mzie9AQ"
+  },
+  {
+    "id": 6,
+    "name": "Dummy Artist",
+    "genre": "Rock",
+    "decade": "1990s",
+    "region": "Skopje",
+    "image": "static/images/artists/arhangel.jpg",
+    "spotify_artist_id": "7Ed6HtcARp9ahxFVxfit7o",
+    "spotify_link": "https://open.spotify.com/artist/7Ed6HtcARp9ahxFVxfit7o?si=Jb5tm7CvRPSFu__Mzie9AQ"
   }
 ]

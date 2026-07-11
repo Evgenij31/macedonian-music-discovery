@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, send_file
+from flask import Flask, render_template, jsonify, send_file, redirect, url_for
 import os
 import json
 from sqlalchemy import inspect, text
@@ -74,6 +74,11 @@ with app.app_context():
 # -------------------------
 
 # Route to serve main HTML page
+@app.route("/<path:path>")
+def catch_all(path):
+    return render_template("404.html"), 404
+
+# Route to serve main HTML page
 @app.route("/")
 def home():
     return render_template("index.html", active_page="home")
@@ -102,6 +107,13 @@ def favicon():
 def admin():
     artists = Artist.query.order_by(Artist.name.asc()).all()
     return render_template("admin/index.html", active_page="admin", artists=artists)
+
+@app.route("/admin/delete_artist/<int:artist_id>", methods=["POST"])
+def delete_artist(artist_id):
+    artist = Artist.query.get_or_404(artist_id)
+    db.session.delete(artist)
+    db.session.commit()
+    return redirect(url_for("admin"))
 
 
 # Route to serve artist data as an API endpoint

@@ -595,6 +595,16 @@ body {
   font-size: 0.82rem;
 }
 
+.admin-artist-id {
+  background: transparent;
+  border: none;
+  color: rgba(248, 250, 252, 0.5);
+  font-family: 'SF Mono', 'Fira Code', 'Monaco', monospace;
+  font-size: 0.75rem;
+  padding: 0.28rem 0.5rem;
+  opacity: 0.7;
+}
+
 .delete-artist-btn {
   background: transparent;
   color: #ffb4b4;
