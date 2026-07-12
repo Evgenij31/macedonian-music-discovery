@@ -55,7 +55,7 @@
               id="artist-search"
               class="artist-search-input"
               placeholder="Search artists by name or ID..."
-            >
+            />
           </div>
           <p class="artist-list-help">
             Manage the catalog below. Each entry shows the core details at a
@@ -92,60 +92,71 @@
     </div>
 
     <!-- Search functionality -->
-<script>
-  function filterArtists(query) {
-    const allItems = document.querySelectorAll('.admin-artist-item');
-    const filterValue = query.toLowerCase().trim();
+    <script>
+      function filterArtists(query) {
+        const allItems = document.querySelectorAll(".admin-artist-item");
+        const filterValue = query.toLowerCase().trim();
 
-    if (!filterValue) {
-      allItems.forEach(item => item.style.display = '');
-      return;
-    }
+        if (!filterValue) {
+          allItems.forEach((item) => (item.style.display = ""));
+          return;
+        }
 
-    const matcher = new RegExp(filterValue, 'i');
-    allItems.forEach(item => {
-      const name = item.querySelector('.admin-artist-main strong').textContent;
-      const id = item.querySelector('.admin-artist-id').textContent;
-      const genre = item.querySelectorAll('.admin-artist-meta span')[1].textContent;
-      const decade = item.querySelectorAll('.admin-artist-meta span')[2].textContent;
-      const region = item.querySelectorAll('.admin-artist-meta span')[3].textContent;
+        const matcher = new RegExp(filterValue, "i");
+        allItems.forEach((item) => {
+          const name = item.querySelector(
+            ".admin-artist-main strong",
+          ).textContent;
+          const id = item.querySelector(".admin-artist-id").textContent;
+          const genre = item.querySelectorAll(".admin-artist-meta span")[1]
+            .textContent;
+          const decade = item.querySelectorAll(".admin-artist-meta span")[2]
+            .textContent;
+          const region = item.querySelectorAll(".admin-artist-meta span")[3]
+            .textContent;
 
-      const shouldShow = matcher.test(name) || matcher.test(id) ||
-        matcher.test(genre) || matcher.test(decade) || matcher.test(region);
-      item.style.display = shouldShow ? '' : 'none';
-    });
-  }
+          const shouldShow =
+            matcher.test(name) ||
+            matcher.test(id) ||
+            matcher.test(genre) ||
+            matcher.test(decade) ||
+            matcher.test(region);
+          item.style.display = shouldShow ? "" : "none";
+        });
+      }
 
-  // Debounce input for better performance
-  document.getElementById('artist-search').addEventListener('input', function(e) {
-    clearTimeout(this.debounceTimer);
-    this.debounceTimer = setTimeout(() => {
-      filterArtists(this.value);
-    }, 300);
-  });
-</script>
+      // Debounce input for better performance
+      document
+        .getElementById("artist-search")
+        .addEventListener("input", function (e) {
+          clearTimeout(this.debounceTimer);
+          this.debounceTimer = setTimeout(() => {
+            filterArtists(this.value);
+          }, 300);
+        });
+    </script>
 
-<style>
-.search-container {
-  margin: 1rem 0;
-  display: flex;
-  justify-content: center;
-}
-.artist-search-input {
-  width: 80%;
-  max-width: 400px;
-  padding: 0.6rem;
-  border-radius: 6px;
-  border: 1px solid var(--indigo-muted);
-  background-color: var(--deep-void);
-  color: var(--text-light);
-}
-.artist-search-input:focus {
-  border-color: var(--mint-light);
-  outline: none;
-}
-</style>
+    <style>
+      .search-container {
+        margin: 1rem 0;
+        display: flex;
+        justify-content: center;
+      }
+      .artist-search-input {
+        width: 80%;
+        max-width: 400px;
+        padding: 0.6rem;
+        border-radius: 6px;
+        border: 1px solid var(--indigo-muted);
+        background-color: var(--deep-void);
+        color: var(--text-light);
+      }
+      .artist-search-input:focus {
+        border-color: var(--mint-light);
+        outline: none;
+      }
+    </style>
 
-<!-- <script src="/static/js/app.js"></script> -->
+    <!-- <script src="/static/js/app.js"></script> -->
   </body>
 </html>

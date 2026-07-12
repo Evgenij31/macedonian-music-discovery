@@ -1,3 +1,4 @@
+from werkzeug.security import check_password_hash, generate_password_hash
 from extensions import db
 
 class Artist(db.Model):
@@ -25,3 +26,18 @@ class Artist(db.Model):
             "spotify_artist_id": self.spotify_artist_id,
             "spotify_link": self.spotify_link
         }
+
+class User(db.Model):
+    __tablename__ = 'users'
+
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(100), nullable=False, unique=True)
+    email = db.Column(db.String(150), nullable=False, unique=True)
+    password = db.Column(db.String(255), nullable=False)
+    user_type = db.Column(db.String(20), nullable=False)
+
+    def set_password(self, password):
+        self.password = generate_password_hash(password, method='pbkdf2:sha256')
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
