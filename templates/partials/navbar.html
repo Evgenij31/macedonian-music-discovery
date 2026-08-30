@@ -31,12 +31,14 @@
         </div>
       </div>
       {% else %}
-      <a href="/login" class="{{ 'active' if active_page == 'login' else '' }}"
+      <a
+        href="/login"
+        class="auth-btn secondary {{ 'active' if active_page == 'login' else '' }}"
         >Login</a
       >
       <a
         href="/signup"
-        class="{{ 'active' if active_page == 'signup' else '' }}"
+        class="auth-btn primary {{ 'active' if active_page == 'signup' else '' }}"
         >Sign Up</a
       >
       {% endif %}
