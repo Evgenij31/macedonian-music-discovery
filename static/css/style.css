@@ -29,6 +29,17 @@ body {
   scroll-behavior: smooth;
 }
 
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
 .artist-page {
   background:
     radial-gradient(circle at top left, rgba(111, 255, 233, 0.15), transparent 28%),
@@ -668,6 +679,81 @@ body {
   cursor: pointer;
   font-weight: bold;
   transition: background 0.3s, transform 0.2s;
+}
+
+.flash-messages {
+  /* center position */
+  position: fixed;
+  top: 6rem;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background-color: var(--indigo-muted);
+  border: 1px solid var(--indigo-dark);
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  z-index: 1000;
+
+  animation: slideDownFlash 0.5s ease-out;
+}
+
+.login {
+  height: 100vh;
+}
+
+.login .login-container {
+  min-width: 420px;
+  margin: 3rem auto;
+  padding: 2rem;
+  border-radius: 12px;
+  background-color: var(--dark-purple-transparent);
+  border: 1px solid var(--indigo-muted);
+  font-size: 1.25rem;
+}
+
+.login h2 {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--mint-light);
+  font-size: 2.25rem;
+}
+
+.login form input {
+  width: 100%;
+  padding: 0.6rem;
+  margin: 0.7rem 0;
+  border-radius: 6px;
+  border: 1px solid var(--indigo-muted);
+  background-color: var(--deep-void);
+  color: var(--text-light);
+  margin-bottom: 1rem;
+  outline: none;
+}
+
+.login form button {
+  width: 100%;
+  background-color: var(--mint-dark);
+  color: var(--deep-void);
+  padding: 0.6rem;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.2s;
+  margin-top: 1.2rem;
+  font-size: 1.25rem;
+}
+
+.login form button:hover {
+  background-color: var(--mint-light);
+  transform: translateY(-2px);
+}
+
+.login form .error-message {
+  color: #ffb4b4;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  text-align: center;
 }
 
 /* Responsive Breakpoint for Mobile devices */

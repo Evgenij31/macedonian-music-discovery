@@ -1,7 +1,8 @@
-from flask import Flask, render_template, jsonify, send_file, redirect, url_for
+from flask import Flask, render_template, jsonify, send_file, redirect, url_for, request, flash, session
 import os
 import json
 from sqlalchemy import inspect, text
+from sqlalchemy.exc import IntegrityError
 
 # 1. Import db from the extensions file
 from extensions import db 
@@ -10,6 +11,7 @@ app = Flask(__name__)
 
 # Configure local SQLite database
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-only-change-me')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(BASE_DIR, 'instance', 'music.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -17,7 +19,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
 # 3. Safe to import models now since models no longer imports app.py!
-from models import Artist 
+from models import Artist, User 
 
 
 def sync_artist_table_schema():
@@ -63,7 +65,6 @@ with app.app_context():
                         image_url=data.get("image"),  # Maps 'image' from JSON to 'image_url' in DB
                         description=data.get("description", ""),
                         spotify_artist_id=data.get("spotify_artist_id"),
-                        spotify_link=data.get("spotify_link")
                     )
                     db.session.add(new_artist)
                 db.session.commit()
@@ -90,6 +91,74 @@ def about():
 @app.route("/favorites")
 def favorites():
     return render_template("favorites.html", active_page="favorites")
+
+@app.route("/login")
+def login():
+    return render_template("login.html", active_page="login")
+
+@app.route("/signup")
+def signup():
+    return render_template("signup.html", active_page="signup")
+
+@app.route("/signup_auth", methods=["POST"])
+def signup_auth():
+    # Handle signup form submission
+    username = request.form.get("username", "").strip()
+    email = request.form.get("email", "").strip().lower()
+    password = request.form.get("password", "")
+
+    # Trim whitespace and validate inputs
+    if not username or not email or not password:
+        flash("All fields are required.")
+        return redirect(url_for("signup"))
+
+    # Check if the username or email already exists in the database
+    existing_user = User.query.filter((User.username == username) | (User.email == email)).first()
+    if existing_user:
+        flash("Username or email already exists. Please choose another.")
+        return redirect(url_for("signup"))
+
+    new_user = User(username=username, email=email, user_type="user")
+    new_user.set_password(password)
+    db.session.add(new_user)
+
+    try:
+        db.session.commit()
+    except IntegrityError:
+        db.session.rollback()
+        flash("Username or email already exists. Please choose another.")
+        return redirect(url_for("signup"))
+
+    flash("Signup successful! You can now log in.")
+    return redirect(url_for("login"))
+
+@app.route("/login_auth", methods=["POST"])
+def login_auth():
+    # Handle login form submission
+    email = request.form.get("email", "").strip()
+    password = request.form.get("password", "")
+
+    if not email or not password:
+        flash("Both email and password are required.")
+        return redirect(url_for("login"))
+
+    user = User.query.filter_by(email=email).first()
+
+    if user and user.check_password(password):
+        session["user_id"] = user.id
+        session["name"] = user.username
+        flash(f"Welcome back, {user.username}!")
+        return redirect(url_for("home"))
+
+    else:
+        flash("Invalid email or password. Please try again.")
+        return redirect(url_for("login"))
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    flash("You have been logged out.")
+    return redirect(url_for("home"))
 
 @app.route("/artist/<int:artist_id>")
 def artist(artist_id):

@@ -133,4 +133,17 @@ document.addEventListener("DOMContentLoaded", () => {
         const summary = activeFilters.length > 0 ? activeFilters.join(" • ") : "None";
         activeFiltersText.textContent = `Active Filters: ${summary} (${resultCount} found)`;
     }
+
+    // Check for flash messages and hide after 5 seconds
+    const flashMessages = document.querySelectorAll(".flash-messages");
+    if (flashMessages.length > 0) {
+        setTimeout(() => {
+            flashMessages.forEach(msg => {
+                msg.style.animation = "fadeOut 1s ease forwards"; // Apply fade-out animation
+                setTimeout(() => {
+                    msg.style.display = "none"; // Hide the message after the fade-out animation
+                }, 1000);
+            });
+        }, 5000);
+    }
 });

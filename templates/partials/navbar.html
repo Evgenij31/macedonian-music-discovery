@@ -14,5 +14,19 @@
         >Favorites</a
       >
     </nav>
+
+    <div class="auth-links">
+      {% if 'user_id' in session %}
+      <p class="user-info">{{session.name}}</p>
+      {% else %}
+      <a href="/login" class="{{ 'active' if active_page == 'login' else '' }}"
+        >Login</a
+      >
+      <a
+        href="/signup"
+        class="{{ 'active' if active_page == 'signup' else '' }}"
+        >Sign Up</a
+      >
+      {% endif %}
   </div>
 </header>

@@ -2,34 +2,35 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Login</title>
+    <title>Sign Up</title>
     <link rel="stylesheet" href="/static/css/style.css" />
-    <link rel="stylesheet" href="/static/css/animations.css" />
   </head>
   <body>
     <main class="login flex-center flex-column">
       <div class="login-container">
-        <h2>Login</h2>
+        <h2>Sign Up</h2>
         {% with messages = get_flashed_messages() %} {% if messages %}
         <ul>
           {% for message in messages %}
           <li>{{ message }}</li>
           {% endfor %}
         </ul>
-        <br />
-        {% endif %} {% endwith %} {% with messages = get_flashed_messages() %}
-        {% if messages %} {% endif %} {% endwith %}
+        {% endif %} {% endwith %}
+
         <form
           method="post"
-          action="{{ url_for('login_auth') }}"
+          action="/signup_auth"
           class="flex-center flex-column"
         >
+          <label for="username">Username:</label>
+          <input type="text" name="username" required />
+
           <label for="email">Email:</label>
           <input type="email" name="email" required />
 
           <label for="password">Password:</label>
           <input type="password" name="password" required />
-          <button type="submit">Login</button>
+          <button type="submit">Sign Up</button>
         </form>
       </div>
     </main>

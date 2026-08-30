@@ -5,9 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Macedonian Music Discovery</title>
     <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/animations.css" />
   </head>
   <body>
     {% include "partials/navbar.html" %}
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <div class="flash-messages">
+      {% for message in messages %}
+      <p>{{ message }}</p>
+      {% endfor %}
+    </div>
+    {% endif %} {% endwith %}
 
     <section class="hero-section">
       <div class="hero-content">
