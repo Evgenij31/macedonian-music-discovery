@@ -1,9 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const userMenuWrapper = document.querySelector(".user-menu-wrapper");
+    const userMenuButton = document.querySelector(".user-menu-button");
     const gridContainer = document.querySelector(".artist-grid");
     const searchInput = document.querySelector("#artist-search");
     const clearButton = document.querySelector(".clear-btn");
     const activeFiltersText = document.querySelector(".active-tags-bar span");
     const filterInputs = document.querySelectorAll('input[type="checkbox"][name]');
+
+    if (userMenuWrapper && userMenuButton) {
+        userMenuButton.addEventListener("click", () => {
+            const isOpen = userMenuWrapper.classList.contains("is-open");
+            userMenuWrapper.classList.toggle("is-open", !isOpen);
+        });
+
+        document.addEventListener("click", (event) => {
+            if (!userMenuWrapper.contains(event.target)) {
+                userMenuWrapper.classList.remove("is-open");
+            }
+        });
+    }
 
     const filterState = {
         search: "",

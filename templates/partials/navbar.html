@@ -17,7 +17,19 @@
 
     <div class="auth-links">
       {% if 'user_id' in session %}
-      <p class="user-info">{{session.name}}</p>
+      <div class="user-menu-wrapper">
+        <button class="user-menu-button" type="button" aria-label="User menu">
+          <span class="user-avatar">{{ session.name[0]|upper }}</span>
+          <span class="user-name">{{ session.name }}</span>
+          <span class="user-chevron">▾</span>
+        </button>
+
+        <div class="user-dropdown" role="menu" aria-label="User account menu">
+          <a href="#" class="dropdown-item">Favorites</a>
+          <a href="#" class="dropdown-item">Settings</a>
+          <a href="#" class="dropdown-item">Log out</a>
+        </div>
+      </div>
       {% else %}
       <a href="/login" class="{{ 'active' if active_page == 'login' else '' }}"
         >Login</a
@@ -28,5 +40,6 @@
         >Sign Up</a
       >
       {% endif %}
+    </div>
   </div>
 </header>

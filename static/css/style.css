@@ -58,7 +58,7 @@ body {
 .app-header {
   background-color: var(--dark-purple-transparent);
   border-bottom: 1px solid var(--indigo-muted);
-  padding: 1.2rem 2rem;
+  padding: 0.7rem 2rem;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -68,6 +68,7 @@ body {
 .header-container {
   max-width: 1200px;
   margin: 0 auto;
+  min-height: 52px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -101,6 +102,130 @@ body {
 .nav-links a.active,
 .nav-links a:hover {
   color: var(--mint-light);
+}
+
+.auth-links {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.auth-links a {
+  color: var(--text-light);
+  text-decoration: none;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.auth-links a:hover,
+.auth-links a.active {
+  color: var(--mint-light);
+}
+
+.user-menu-wrapper {
+  position: relative;
+}
+
+.user-menu-button {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.55rem 0.9rem 0.55rem 0.6rem;
+  border: 1px solid rgba(111, 255, 233, 0.25);
+  border-radius: 999px;
+  background: rgba(28, 37, 65, 0.8);
+  color: var(--text-light);
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(11, 19, 43, 0.2);
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.user-menu-button:hover,
+.user-menu-button:focus-visible {
+  border-color: rgba(111, 255, 233, 0.8);
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(91, 192, 190, 0.18);
+  outline: none;
+}
+
+.user-menu-wrapper.is-open .user-menu-button {
+  border-color: rgba(111, 255, 233, 0.8);
+  box-shadow: 0 14px 30px rgba(91, 192, 190, 0.18);
+}
+
+.user-avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--mint-dark), var(--mint-light));
+  color: var(--deep-void);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.user-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.user-chevron {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: calc(100% + 0.75rem);
+  right: 0;
+  min-width: 180px;
+  padding: 0.55rem;
+  background: rgba(10, 18, 35, 0.96);
+  border: 1px solid rgba(111, 255, 233, 0.2);
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(2, 6, 23, 0.5);
+  display: none;
+  z-index: 20;
+}
+
+.user-menu-wrapper.is-open .user-dropdown {
+  display: block;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 0.75rem 0.8rem;
+  color: var(--text-light);
+  text-decoration: none;
+  border-radius: 10px;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background: rgba(111, 255, 233, 0.08);
+  color: var(--mint-light);
+  transform: translateX(2px);
+}
+
+@media (max-width: 640px) {
+  .app-header {
+    padding-inline: 1rem;
+  }
+
+  .header-container {
+    gap: 0.75rem;
+  }
+
+  .nav-links {
+    gap: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .user-name {
+    display: none;
+  }
 }
 
 /* Hero Section */
