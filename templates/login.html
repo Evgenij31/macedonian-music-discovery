@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="/static/css/animations.css" />
   </head>
   <body>
+    {% set form_action = 'login_auth' %} {% if request.path == '/admin/login' %}
+    {% set form_action = 'admin_login_auth' %} is admin {% endif %}
     <main class="login flex-center flex-column">
       <div class="login-container">
         <h2>Login</h2>
@@ -21,7 +23,7 @@
         {% if messages %} {% endif %} {% endwith %}
         <form
           method="post"
-          action="{{ url_for('login_auth') }}"
+          action="{{ url_for(form_action) }}"
           class="flex-center flex-column"
         >
           <label for="email">Email:</label>

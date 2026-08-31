@@ -177,6 +177,33 @@ def admin():
     artists = Artist.query.order_by(Artist.name.asc()).all()
     return render_template("admin/index.html", active_page="admin", artists=artists)
 
+@app.route("/admin/login")
+def admin_login():
+    return render_template("login.html", active_page="admin_login")
+
+@app.route("/admin/login_auth", methods=["POST"])
+def admin_login_auth():
+    # Handle admin login form submission
+    email = request.form.get("email", "").strip()
+    password = request.form.get("password", "")
+
+    if not email or not password:
+        flash("Both email and password are required.")
+        return redirect(url_for("login"))
+
+    user = User.query.filter_by(email=email, user_type="admin").first()
+
+    if user and user.check_password(password):
+        session["user_id"] = user.id
+        session["name"] = user.username
+        flash(f"Welcome back, {user.username}!")
+        return redirect(url_for("admin"))
+
+    else:
+        flash("Invalid admin credentials. Please try again.")
+        return redirect(url_for("login"))
+    
+
 @app.route("/admin/delete_artist/<int:artist_id>", methods=["POST"])
 def delete_artist(artist_id):
     artist = Artist.query.get_or_404(artist_id)

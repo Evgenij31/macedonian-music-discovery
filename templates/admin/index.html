@@ -13,8 +13,8 @@
 
     <div id="dashboard">
       <main class="admin-content">
-        <div class="add-artist">
-          <h2>Add New Artist</h2>
+        <div class="add-artist flex-center flex-column">
+          <h2 class="text-center">Add New Artist</h2>
           <form id="add-artist-form" method="POST" action="/admin/add_artist">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required />
@@ -48,7 +48,7 @@
           </form>
         </div>
         <div class="artist-list">
-          <h2>Existing Artists</h2>
+          <h2 class="text-center">Existing Artists</h2>
           <div class="search-container">
             <input
               type="text"
