@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="/static/css/animations.css" />
   </head>
   <body>
+    <header>
+      <h1>Welcome to the Macedonian Music Discovery</h1>
+    </header>
     {% set form_action = 'login_auth' %} {% if request.path == '/admin/login' %}
     {% set form_action = 'admin_login_auth' %} is admin {% endif %}
     <main class="login flex-center flex-column">

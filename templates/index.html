@@ -43,57 +43,32 @@
 
         <div class="filter-group">
           <h3>Genre</h3>
+          {% for genre in filters.genres %}
           <label
-            ><input type="checkbox" name="genre" value="Rock" /> Rock</label
+            ><input type="checkbox" name="genre" value="{{ genre }}" /> {{ genre
+            }}</label
           >
-          <label><input type="checkbox" name="genre" value="Pop" /> Pop</label>
-          <label
-            ><input type="checkbox" name="genre" value="Hip-Hop" />
-            Hip-Hop</label
-          >
-          <label
-            ><input type="checkbox" name="genre" value="Alternative" />
-            Alternative</label
-          >
+          {% endfor %}
         </div>
 
         <div class="filter-group">
           <h3>Decade</h3>
+          {% for decade in filters.decades %}
           <label
-            ><input type="checkbox" name="decade" value="1980s" /> 1980s</label
+            ><input type="checkbox" name="decade" value="{{ decade }}" /> {{
+            decade }}</label
           >
-          <label
-            ><input type="checkbox" name="decade" value="1990s" /> 1990s</label
-          >
-          <label
-            ><input type="checkbox" name="decade" value="2000s" /> 2000s</label
-          >
-          <label
-            ><input type="checkbox" name="decade" value="2010s" /> 2010s</label
-          >
-          <label
-            ><input type="checkbox" name="decade" value="2020s" /> 2020s</label
-          >
+          {% endfor %}
         </div>
 
         <div class="filter-group">
           <h3>Region</h3>
+          {% for region in filters.regions %}
           <label
-            ><input type="checkbox" name="region" value="Skopje" />
-            Skopje</label
+            ><input type="checkbox" name="region" value="{{ region }}" /> {{
+            region }}</label
           >
-          <label
-            ><input type="checkbox" name="region" value="Bitola" />
-            Bitola</label
-          >
-          <label
-            ><input type="checkbox" name="region" value="Prilep" />
-            Prilep</label
-          >
-          <label
-            ><input type="checkbox" name="region" value="Kumanovo" />
-            Kumanovo</label
-          >
+          {% endfor %}
         </div>
       </aside>
 

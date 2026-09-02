@@ -74,6 +74,17 @@ with app.app_context():
                 print(f"Error seeding database: {seeding_error}")
 # -------------------------
 
+# Helper function to get distinct values for a given column
+def get_distinct_values(column):
+    rows = (
+        db.session.query(column)
+        .filter(column.isnot(None), column != "")
+        .distinct()
+        .order_by(column.asc())
+        .all()
+    )
+    return [value for (value,) in rows]
+
 # Route to serve main HTML page
 @app.route("/<path:path>")
 def catch_all(path):
@@ -82,7 +93,13 @@ def catch_all(path):
 # Route to serve main HTML page
 @app.route("/")
 def home():
-    return render_template("index.html", active_page="home")
+    filters = {
+        "genres": get_distinct_values(Artist.genre),
+        "decades": get_distinct_values(Artist.decade),
+        "regions": get_distinct_values(Artist.region),
+    }
+
+    return render_template("index.html", active_page="home", filters=filters)
 
 @app.route("/about")
 def about():
@@ -94,6 +111,10 @@ def favorites():
 
 @app.route("/login")
 def login():
+    # If user is already logged in, redirect to home
+    if "user_id" in session:
+        flash("You are already logged in.")
+        return redirect(url_for("home"))
     return render_template("login.html", active_page="login")
 
 @app.route("/signup")
