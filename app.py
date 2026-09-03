@@ -85,7 +85,7 @@ def get_distinct_values(column):
     )
     return [value for (value,) in rows]
 
-# Route to serve main HTML page
+# Route to serve 404 page for any undefined routes
 @app.route("/<path:path>")
 def catch_all(path):
     return render_template("404.html"), 404

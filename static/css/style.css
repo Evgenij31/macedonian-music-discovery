@@ -86,7 +86,8 @@ body {
   font-weight: bold;
 }
 
-.logo span {
+.logo span,
+h1 span {
   color: var(--mint-light);
 }
 
