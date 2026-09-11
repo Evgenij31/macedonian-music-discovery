@@ -698,6 +698,7 @@ h1 span {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
+  align-items: start;
 }
 
 .admin-page h1 {
@@ -837,6 +838,11 @@ h1 span {
 
 .admin-artist-empty {
   color: rgba(248, 250, 252, 0.75);
+}
+
+.admin-page .add-artist {
+  position: sticky;
+  top: 6rem;
 }
 
 .admin-page .add-artist form {
