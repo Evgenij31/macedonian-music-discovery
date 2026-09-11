@@ -17,10 +17,15 @@
 
     <div class="auth-links">
       {% if 'user_id' in session %}
-      <div class="user-menu-wrapper">
+      <div
+        class="user-menu-wrapper {{ 'admin-user' if session.get('user_type') == 'admin' else '' }}"
+      >
         <button class="user-menu-button" type="button" aria-label="User menu">
           <span class="user-avatar">{{ session.name[0]|upper }}</span>
           <span class="user-name">{{ session.name }}</span>
+          {% if session.get('user_type') == 'admin' %}
+          <span class="user-role-badge">Admin</span>
+          {% endif %}
           <span class="user-chevron">▾</span>
         </button>
 

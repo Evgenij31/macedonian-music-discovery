@@ -206,6 +206,7 @@ def login_auth():
     if user and user.check_password(password):
         session["user_id"] = user.id
         session["name"] = user.username
+        session["user_type"] = user.user_type
         flash(f"Welcome back, {user.username}!")
         return redirect(url_for("home"))
 
@@ -294,6 +295,7 @@ def admin_login_auth():
     if user and user.check_password(password):
         session["user_id"] = user.id
         session["name"] = user.username
+        session["user_type"] = user.user_type
         flash(f"Welcome back, {user.username}!")
         return redirect(url_for("admin"))
 

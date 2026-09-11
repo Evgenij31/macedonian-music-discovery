@@ -73,8 +73,8 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   min-height: 52px;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 1rem;
 }
@@ -84,11 +84,16 @@ body {
   text-decoration: none;
   font-size: 1.5rem;
   font-weight: bold;
+  letter-spacing: 0.01em;
 }
 
 .logo span,
 h1 span {
   color: var(--mint-light);
+}
+
+.logo span {
+  text-shadow: 0 0 18px rgba(111, 255, 233, 0.28);
 }
 
 .nav-links a {
@@ -100,8 +105,10 @@ h1 span {
 .nav-links {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1.5rem;
   flex-wrap: wrap;
+  padding-right: 2rem;
 }
 
 .nav-links a.active,
@@ -178,6 +185,8 @@ h1 span {
   display: flex;
   align-items: center;
   gap: 0.7rem;
+  min-width: 0;
+  max-width: 100%;
   padding: 0.55rem 0.9rem 0.55rem 0.6rem;
   border: 1px solid rgba(111, 255, 233, 0.25);
   border-radius: 999px;
@@ -215,8 +224,24 @@ h1 span {
 }
 
 .user-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font-size: 0.95rem;
   font-weight: 600;
+}
+
+.user-role-badge {
+  padding: 0.22rem 0.48rem;
+  border: 1px solid rgba(111, 255, 233, 0.22);
+  border-radius: 999px;
+  background: rgba(111, 255, 233, 0.1);
+  color: var(--mint-light);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .user-chevron {
@@ -269,9 +294,10 @@ h1 span {
   .nav-links {
     gap: 0.8rem;
     font-size: 0.9rem;
+    padding-right: 0;
   }
 
-  .user-name {
+  .user-role-badge {
     display: none;
   }
 }
@@ -300,7 +326,9 @@ h1 span {
 .hero-section .overlay {
   position: absolute;
   inset: 0;
-  background-color: rgba(11, 19, 43, 0.7);
+  background:
+    linear-gradient(180deg, rgba(11, 19, 43, 0.62) 0%, rgba(11, 19, 43, 0.74) 52%, rgba(5, 9, 20, 0.98) 100%),
+    radial-gradient(ellipse at center, transparent 15%, rgba(5, 9, 20, 0.34) 100%);
   z-index: 0;
   pointer-events: none;
 }
@@ -335,13 +363,16 @@ h1 span {
   padding: 0.8rem 2rem;
   border-radius: 25px;
   text-decoration: none;
-  font-weight: bold;
-  transition: background 0.3s, transform 0.2s;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  box-shadow: 0 10px 28px rgba(91, 192, 190, 0.2);
+  transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
 }
 
 .cta-btn:hover {
   background-color: var(--mint-light);
   transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(111, 255, 233, 0.32);
 }
 
 /* Macro Layout: Sidebar + Content Feed using CSS Grid */
@@ -1060,25 +1091,49 @@ h1 span {
   }
 
   .header-container {
-    flex-direction: column;
-    align-items: flex-start;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "logo auth"
+      "nav nav";
+    gap: 0.9rem 1rem;
+  }
+
+  .logo {
+    grid-area: logo;
+  }
+
+  .auth-links {
+    grid-area: auth;
+    min-width: 0;
+  }
+
+  .user-menu-button {
+    width: min(100%, 13rem);
+  }
+
+  .user-name {
+    flex: 1 1 auto;
+    width: clamp(5rem, 25vw, 10rem);
   }
 
   .nav-links {
+    grid-area: nav;
+    justify-content: flex-start;
     width: 100%;
-    gap: 0.75rem 1rem;
+    padding: 0.65rem 0 0;
+    border-top: 1px solid rgba(58, 80, 107, 0.7);
   }
 
   .nav-links a {
     margin-left: 0;
-    padding: 0.35rem 0;
+    padding: 0.3rem 0;
   }
 
   .hero-section {
     min-height: auto;
-    padding: 4.5rem 1rem 3.5rem;
+    padding: 4.5rem 1.25rem 3.5rem;
     background-attachment: scroll;
-    height: 70vh;
+    height: min(70vh, 38rem);
   }
 
   .hero-content {
@@ -1101,14 +1156,18 @@ h1 span {
   }
 
   .main-layout {
-    margin: 1.25rem auto;
-    gap: 1.25rem;
+    margin: 1rem auto 2rem;
+    gap: 1rem;
     grid-template-columns: 1fr;
     /* Sidebar stacks above the grid */
   }
 
   .sidebar {
-    padding: 1.25rem;
+    padding: 1rem;
+  }
+
+  .filter-group {
+    margin-bottom: 1.15rem;
   }
 
   .active-tags-bar {
@@ -1120,6 +1179,10 @@ h1 span {
   .artist-grid {
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 1rem;
+  }
+
+  .artist-card img {
+    height: 150px;
   }
 
   .about-hero,
@@ -1162,5 +1225,83 @@ h1 span {
     justify-self: stretch;
     width: 100%;
     justify-content: center;
+  }
+
+  .login {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .login .login-container {
+    min-width: 0;
+    width: min(calc(100% - 2rem), 28rem);
+    margin: 2rem auto;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header {
+    padding-inline: 0.9rem;
+  }
+
+  .auth-links {
+    gap: 0.4rem;
+  }
+
+  .auth-btn {
+    padding: 0.55rem 0.7rem;
+    font-size: 0.82rem;
+  }
+
+  .user-menu-button {
+    gap: 0.4rem;
+    padding: 0.4rem 0.55rem 0.4rem 0.4rem;
+  }
+
+  .user-name {
+    width: clamp(4.5rem, 25vw, 8rem);
+    font-size: 0.85rem;
+  }
+
+  .hero-section {
+    height: min(68vh, 34rem);
+    padding: 3.5rem 1rem 2.5rem;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(1.9rem, 10vw, 2.6rem);
+  }
+
+  .hero-content p {
+    font-size: 0.98rem;
+    line-height: 1.55;
+  }
+
+  .active-tags-bar {
+    padding: 0.75rem 0.9rem;
+    font-size: 0.82rem;
+  }
+
+  .artist-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .artist-card {
+    padding: 0.7rem;
+  }
+
+  .artist-card img {
+    height: 120px;
+    margin-bottom: 0.55rem;
+  }
+
+  .artist-card h2 {
+    font-size: 1rem;
+  }
+
+  .artist-card p {
+    font-size: 0.78rem;
   }
 }
