@@ -62,5 +62,133 @@
     "region": "Macedonia",
     "image": "static/images/artists/slave-veljanovski.jpg",
     "spotify_artist_id": "5kLcnwc2WB13hc2T97gwak"
+  },
+  {
+    "name": "Gocho \"El Lápiz De Platino\"",
+    "genre": "Other",
+    "decade": "Unknown",
+    "region": "Puerto Rico",
+    "image": "static/images/artists/gocho-el-lapiz-de-platino.jpg",
+    "spotify_artist_id": "65VADjjC47dZbyOyrgNWJA"
+  },
+  {
+    "name": "Kiril Džajkovski",
+    "genre": "Other",
+    "decade": "1960s",
+    "region": "Skopje",
+    "image": "static/images/artists/kiril-dzajkovski.jpg",
+    "spotify_artist_id": "1Rn5tdbgbW4qHyffAaoMCY"
+  },
+  {
+    "name": "Usnija Redzepova",
+    "genre": "Other",
+    "decade": "Unknown",
+    "region": "Macedonia",
+    "image": "static/images/artists/usnija-redzepova.jpg",
+    "spotify_artist_id": "6LENT7XGETMGGjWRyYgNLB"
+  },
+  {
+    "name": "ареал обитания",
+    "genre": "Other",
+    "decade": "Unknown",
+    "region": "Macedonia",
+    "image": "static/images/artists/artist.jpg",
+    "spotify_artist_id": "0gn8bgpcyfbDzUqMBg8EyO"
+  },
+  {
+    "name": "rich disease",
+    "genre": "Other",
+    "decade": "Unknown",
+    "region": "Macedonia",
+    "image": "static/images/artists/rich-disease.jpg",
+    "spotify_artist_id": "4jQpFmqd6D0rDJChVwKkM8"
+  },
+  {
+    "name": "Spirit Architect",
+    "genre": "Other",
+    "decade": "Unknown",
+    "region": "North Macedonia",
+    "image": "static/images/artists/spirit-architect.jpg",
+    "spotify_artist_id": "3iwPiKLik6H24xHVkVzYV5"
+  },
+  {
+    "name": "Angel Dimov",
+    "genre": "Other",
+    "decade": "Unknown",
+    "region": "Macedonia",
+    "image": "static/images/artists/angel-dimov.jpg",
+    "spotify_artist_id": "3E9yVoz1zA8apnFDn0jAJk"
+  },
+  {
+    "name": "Djantrix",
+    "genre": "Other",
+    "decade": "Unknown",
+    "region": "Macedonia",
+    "image": "static/images/artists/djantrix.jpg",
+    "spotify_artist_id": "4wxfp3hyKEu72DeU3Xoybf"
+  },
+  {
+    "name": "Yudhisthira",
+    "genre": "Electronic",
+    "decade": "Unknown",
+    "region": "North Macedonia",
+    "image": "static/images/artists/yudhisthira.jpg",
+    "spotify_artist_id": "4ky1T6mikzP88kx3NOGqaR"
+  },
+  {
+    "name": "SuperHiks",
+    "genre": "Other",
+    "decade": "Unknown",
+    "region": "Macedonia",
+    "image": "static/images/artists/superhiks.jpg",
+    "spotify_artist_id": "0HlrnJ63cm4YeHPeFgjBOo"
+  },
+  {
+    "name": "ДНК",
+    "genre": "Other",
+    "decade": "Unknown",
+    "region": "Macedonia",
+    "image": "static/images/artists/artist.jpg",
+    "spotify_artist_id": "0z6QiAAA0O67OEYilcfW5C"
+  },
+  {
+    "name": "616 undone.",
+    "genre": "Other",
+    "decade": "Unknown",
+    "region": "Macedonia",
+    "image": "static/images/artists/616-undone.jpg",
+    "spotify_artist_id": "2WusyVGjzENIOLkrrlf3vF"
+  },
+  {
+    "name": "Ferus Mustafov",
+    "genre": "Other",
+    "decade": "Unknown",
+    "region": "Macedonia",
+    "image": "static/images/artists/ferus-mustafov.jpg",
+    "spotify_artist_id": "3F2MsXYrbyKYaFHkK8hNHJ"
+  },
+  {
+    "name": "Sejo Kalač",
+    "genre": "Other",
+    "decade": "1960s",
+    "region": "Macedonia",
+    "image": "static/images/artists/sejo-kalac.jpg",
+    "spotify_artist_id": "5NZ8u64cqkuoan7WVU537t"
+  },
+  {
+    "name": "Muharem Serbezovski",
+    "genre": "Other",
+    "decade": "Unknown",
+    "region": "Macedonia",
+    "image": "static/images/artists/muharem-serbezovski.jpg",
+    "spotify_artist_id": "7ElbAlEMu3q6o0m9YrQ9gV"
+  },
+  {
+    "name": "Fobia",
+    "genre": "Other",
+    "decade": "Unknown",
+    "region": "Macedonia",
+    "image": "static/images/artists/fobia.jpg",
+    "spotify_artist_id": "3SqzxvGCKGJ9PYKXXPwjQS"
   }
 ]

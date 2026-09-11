@@ -2,6 +2,7 @@ from flask import Flask, render_template, jsonify, send_file, redirect, url_for,
 from functools import wraps
 import os
 import json
+from pathlib import Path
 from sqlalchemy import inspect, text
 from sqlalchemy.exc import IntegrityError
 
@@ -100,6 +101,27 @@ def admin_required(view):
         return view(*args, **kwargs)
 
     return wrapped_view
+
+
+def delete_artist_image(artist_id, image_url):
+    """Delete an artist's unshared local image, if it is stored in our catalog."""
+    original_image_url = image_url
+    image_url = (image_url or "").replace("\\", "/").lstrip("/")
+    if image_url.startswith("static/"):
+        image_url = image_url[len("static/") :]
+
+    images_dir = Path(BASE_DIR, "static", "images", "artists").resolve()
+    image_path = Path(BASE_DIR, "static", image_url).resolve()
+
+    if images_dir not in image_path.parents or not image_path.is_file():
+        return
+
+    is_shared = Artist.query.filter(
+        Artist.id != artist_id,
+        Artist.image_url == original_image_url,
+    ).first()
+    if not is_shared:
+        image_path.unlink()
 
 # Route to serve 404 page for any undefined routes
 @app.route("/<path:path>")
@@ -284,8 +306,10 @@ def admin_login_auth():
 @admin_required
 def delete_artist(artist_id):
     artist = Artist.query.get_or_404(artist_id)
+    image_url = artist.image_url
     db.session.delete(artist)
     db.session.commit()
+    delete_artist_image(artist_id, image_url)
     return redirect(url_for("admin"))
 
 
