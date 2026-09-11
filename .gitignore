@@ -3,3 +3,4 @@
 /.venv/
 /instance/
 /static/images/artists/*
+/artists.json
