@@ -14,14 +14,12 @@
       <div class="login-container">
         <h2>Log in</h2>
         {% with messages = get_flashed_messages() %} {% if messages %}
-        <ul>
+        <div class="login-messages" role="status">
           {% for message in messages %}
-          <li>{{ message }}</li>
+          <p>{{ message }}</p>
           {% endfor %}
-        </ul>
-        <br />
-        {% endif %} {% endwith %} {% with messages = get_flashed_messages() %}
-        {% if messages %} {% endif %} {% endwith %}
+        </div>
+        {% endif %} {% endwith %}
         <form
           method="post"
           action="{{ url_for(form_action) }}"

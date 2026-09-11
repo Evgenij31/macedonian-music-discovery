@@ -897,6 +897,22 @@ h1 span {
   font-size: 2.25rem;
 }
 
+.login-messages {
+  margin: -1rem 0 1.5rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--indigo-dark);
+  border-left: 4px solid var(--mint-light);
+  border-radius: 6px;
+  background-color: rgba(111, 255, 233, 0.08);
+  color: var(--text-light);
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.login-messages p {
+  margin: 0;
+}
+
 .login form input {
   width: 100%;
   padding: 0.6rem;
