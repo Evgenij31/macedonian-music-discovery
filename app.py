@@ -5,21 +5,21 @@ import json
 from sqlalchemy import inspect, text
 from sqlalchemy.exc import IntegrityError
 
-# 1. Import db from the extensions file
+# Import db from the extensions file
 from extensions import db 
 
 app = Flask(__name__)
 
-# Configure local SQLite database
+# Configure local sqlite db
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-only-change-me')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(BASE_DIR, 'instance', 'music.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# 2. Hook up the database to our Flask app
+# connect database to app
 db.init_app(app)
 
-# 3. Safe to import models now since models no longer imports app.py!
+# import models since models no longer imports app.py
 from models import Artist, User 
 
 
@@ -49,7 +49,7 @@ with app.app_context():
     db.create_all()
     sync_artist_table_schema()
     
-    # Check if the database is empty. If it is, seed it using artists.json
+    # Check if the db is empty. If it is, seed it using artists.json
     if Artist.query.count() == 0:
         json_path = os.path.join(BASE_DIR, "artists.json")
         if os.path.exists(json_path):
@@ -214,6 +214,44 @@ def favicon():
 def admin():
     artists = Artist.query.order_by(Artist.name.asc()).all()
     return render_template("admin/index.html", active_page="admin", artists=artists)
+
+@app.route("/admin/edit_artist/<int:artist_id>", methods=["GET", "POST"])
+@admin_required
+def edit_artist(artist_id):
+    artist = Artist.query.get_or_404(artist_id)
+
+    if request.method == "POST":
+        required_fields = ("name", "genre", "decade", "region")
+        values = {
+            field: request.form.get(field, "").strip()
+            for field in required_fields
+        }
+
+        if any(not values[field] for field in required_fields):
+            flash("Name, genre, decade, and region are required.")
+            return render_template(
+                "admin/edit_artist.html",
+                active_page="admin",
+                artist=artist,
+            ), 400
+
+        artist.name = values["name"]
+        artist.genre = values["genre"]
+        artist.decade = values["decade"]
+        artist.region = values["region"]
+        artist.description = request.form.get("description", "").strip()
+        artist.image_url = request.form.get("image_url", "").strip()
+        artist.spotify_artist_id = request.form.get("spotify_artist_id", "").strip()
+
+        db.session.commit()
+        flash(f"{artist.name} was updated successfully.")
+        return redirect(url_for("admin"))
+
+    return render_template(
+        "admin/edit_artist.html",
+        active_page="admin",
+        artist=artist,
+    )
 
 @app.route("/admin/login")
 def admin_login():

@@ -8,17 +8,17 @@
     "spotify_artist_id": "0JCTMGwQbfZd84M5HE0TMS"
   },
   {
-    "name": "Leb i Sol",
+    "name": "Leb I Sol",
     "genre": "Rock",
-    "decade": "1980s",
-    "region": "Skopje",
+    "decade": "1970s",
+    "region": "North Macedonia",
     "image": "static/images/artists/leb-i-sol.jpg",
     "spotify_artist_id": "5hNernryMZIWE1Nrygbxp0"
   },
   {
-    "name": "Esma Redžepova",
-    "genre": "Traditional",
-    "decade": "1970s",
+    "name": "Esma Redzepova",
+    "genre": "World",
+    "decade": "1940s",
     "region": "Skopje",
     "image": "static/images/artists/esma-redzepova.jpg",
     "spotify_artist_id": "3hqJ0OoW1ck5ET6lUyV0OQ"
@@ -32,19 +32,35 @@
     "spotify_artist_id": "3MgabjdhjMZu4qF91PUvLw"
   },
   {
-    "name": "Arhangel",
-    "genre": "Rock",
-    "decade": "1990s",
-    "region": "Skopje",
-    "image": "static/images/artists/arhangel.jpg",
-    "spotify_artist_id": "7Ed6HtcARp9ahxFVxfit7o"
+    "name": "Marga Sol",
+    "genre": "Downtempo",
+    "decade": "Unknown",
+    "region": "North Macedonia",
+    "image": "static/images/artists/marga-sol.jpg",
+    "spotify_artist_id": "4y7BFiVRM23Sw8fUPcfXRI"
   },
   {
-    "name": "Dummy Artist",
+    "name": "Vlatko Stefanovski",
     "genre": "Rock",
-    "decade": "1990s",
+    "decade": "1950s",
+    "region": "Prilep",
+    "image": "static/images/artists/vlatko-stefanovski.jpg",
+    "spotify_artist_id": "5ekFgfk58KqyjN2dIVcZ1V"
+  },
+  {
+    "name": "Egorythmia",
+    "genre": "Trance",
+    "decade": "Unknown",
     "region": "Skopje",
-    "image": "static/images/artists/arhangel.jpg",
-    "spotify_artist_id": "7Ed6HtcARp9ahxFVxfit7o"
+    "image": "static/images/artists/egorythmia.jpg",
+    "spotify_artist_id": "4kxgUvOXcumvg81njRP7Ud"
+  },
+  {
+    "name": "Slave Veljanovski",
+    "genre": "Other",
+    "decade": "Unknown",
+    "region": "Macedonia",
+    "image": "static/images/artists/slave-veljanovski.jpg",
+    "spotify_artist_id": "5kLcnwc2WB13hc2T97gwak"
   }
 ]

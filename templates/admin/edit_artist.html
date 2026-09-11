@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit {{ artist.name }} | Macedonian Music Discovery</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+  </head>
+  <body class="admin-page">
+    {% include "partials/navbar.html" %} {% with messages =
+    get_flashed_messages() %} {% if messages %}
+    <div class="flash-messages" role="alert">
+      {% for message in messages %}
+      <div>{{ message }}</div>
+      {% endfor %}
+    </div>
+    {% endif %} {% endwith %}
+
+    <main class="admin-edit-content">
+      <section
+        class="add-artist admin-edit-panel"
+        aria-labelledby="edit-artist-heading"
+      >
+        <div class="admin-edit-heading">
+          <div>
+            <p class="eyebrow">Artist catalog</p>
+            <h1 id="edit-artist-heading">Edit Artist</h1>
+          </div>
+          <a href="{{ url_for('admin') }}" class="admin-back-link"
+            >Back to artists</a
+          >
+        </div>
+
+        <form
+          id="edit-artist-form"
+          method="POST"
+          action="{{ url_for('edit_artist', artist_id=artist.id) }}"
+        >
+          <label for="name">Name:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value="{{ artist.name }}"
+            required
+          />
+
+          <label for="description">Description:</label>
+          <textarea id="description" name="description">
+{{ artist.description or '' }}</textarea
+          >
+
+          <label for="genre">Genre:</label>
+          <input
+            type="text"
+            id="genre"
+            name="genre"
+            value="{{ artist.genre }}"
+            required
+          />
+
+          <label for="decade">Decade:</label>
+          <input
+            type="text"
+            id="decade"
+            name="decade"
+            value="{{ artist.decade }}"
+            required
+          />
+
+          <label for="region">Region:</label>
+          <input
+            type="text"
+            id="region"
+            name="region"
+            value="{{ artist.region }}"
+            required
+          />
+
+          <label for="image_url">Image URL:</label>
+          <input
+            type="text"
+            id="image_url"
+            name="image_url"
+            value="{{ artist.image_url or '' }}"
+          />
+
+          <label for="spotify_artist_id">Spotify Artist ID:</label>
+          <input
+            type="text"
+            id="spotify_artist_id"
+            name="spotify_artist_id"
+            value="{{ artist.spotify_artist_id or '' }}"
+          />
+
+          <div class="admin-edit-actions">
+            <a href="{{ url_for('admin') }}" class="admin-cancel-btn">Cancel</a>
+            <button type="submit">Save Changes</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <script src="/static/js/app.js"></script>
+  </body>
+</html>

@@ -73,15 +73,26 @@
                   <span>{{ artist.region or "No region" }}</span>
                 </div>
               </div>
-              <form
-                method="POST"
-                action="/admin/delete_artist/{{ artist.id }}"
-                onsubmit="
-                  return confirm('Delete this artist? This cannot be undone.');
-                "
-              >
-                <button type="submit" class="delete-artist-btn">Delete</button>
-              </form>
+              <div class="admin-artist-actions">
+                <a
+                  href="{{ url_for('edit_artist', artist_id=artist.id) }}"
+                  class="edit-artist-btn"
+                  >Edit</a
+                >
+                <form
+                  method="POST"
+                  action="/admin/delete_artist/{{ artist.id }}"
+                  onsubmit="
+                    return confirm(
+                      'Delete this artist? This cannot be undone.',
+                    );
+                  "
+                >
+                  <button type="submit" class="delete-artist-btn">
+                    Delete
+                  </button>
+                </form>
+              </div>
             </li>
             {% else %}
             <li class="admin-artist-empty">No artists have been added yet.</li>
