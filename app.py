@@ -1,4 +1,5 @@
 from flask import Flask, render_template, jsonify, send_file, redirect, url_for, request, flash, session
+from functools import wraps
 import os
 import json
 from sqlalchemy import inspect, text
@@ -84,6 +85,21 @@ def get_distinct_values(column):
         .all()
     )
     return [value for (value,) in rows]
+
+
+def admin_required(view):
+    @wraps(view)
+    def wrapped_view(*args, **kwargs):
+        user_id = session.get("user_id")
+        admin_user = User.query.filter_by(id=user_id, user_type="admin").first() if user_id else None
+
+        if admin_user is None:
+            flash("Please log in with an admin account to access that page.")
+            return redirect(url_for("admin_login"))
+
+        return view(*args, **kwargs)
+
+    return wrapped_view
 
 # Route to serve 404 page for any undefined routes
 @app.route("/<path:path>")
@@ -194,6 +210,7 @@ def favicon():
     )
 
 @app.route("/admin")
+@admin_required
 def admin():
     artists = Artist.query.order_by(Artist.name.asc()).all()
     return render_template("admin/index.html", active_page="admin", artists=artists)
@@ -226,6 +243,7 @@ def admin_login_auth():
     
 
 @app.route("/admin/delete_artist/<int:artist_id>", methods=["POST"])
+@admin_required
 def delete_artist(artist_id):
     artist = Artist.query.get_or_404(artist_id)
     db.session.delete(artist)
