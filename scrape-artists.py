@@ -35,6 +35,20 @@ SPOTIFY_SEARCH_URL = "https://api.spotify.com/v1/search"
 MUSICBRAINZ_SEARCH_URL = "https://musicbrainz.org/ws/2/artist"
 MUSICBRAINZ_LOOKUP_URL = "https://musicbrainz.org/ws/2/artist/{}"
 MUSICBRAINZ_TIMEOUT = 60
+INVALID_REGION_LABELS = {
+	"macedonia",
+	"north macedonia",
+	"republic of macedonia",
+	"republic of north macedonia",
+}
+
+
+def canonical_region(value: Any) -> str:
+	"""Return a city/region label, never a country-level value."""
+	region = str(value or "").strip()
+	if not region or region.casefold() in INVALID_REGION_LABELS:
+		return "Unknown"
+	return region
 
 
 def api_request(url: str, *, headers: dict[str, str] | None = None) -> Any:
@@ -124,13 +138,13 @@ def musicbrainz_request(url: str) -> Any:
 	raise RuntimeError("MusicBrainz request failed without an error response")
 
 
-def musicbrainz_artists(max_results: int) -> list[dict[str, Any]]:
+def musicbrainz_artists(max_results: int, offset: int = 0) -> list[dict[str, Any]]:
 	"""Return MusicBrainz artists associated with North Macedonia."""
 	artists: dict[str, dict[str, Any]] = {}
 	for query in ('country:MK', 'area:"North Macedonia"'):
-		for offset in range(0, max_results, 100):
+		for page_offset in range(offset, offset + max_results, 100):
 			params = urlencode(
-				{"query": query, "fmt": "json", "limit": 100, "offset": offset}
+				{"query": query, "fmt": "json", "limit": 100, "offset": page_offset}
 			)
 			try:
 				page = musicbrainz_request(f"{MUSICBRAINZ_SEARCH_URL}?{params}").get(
@@ -142,7 +156,7 @@ def musicbrainz_artists(max_results: int) -> list[dict[str, Any]]:
 			for artist in page:
 				if artist.get("id") and artist.get("name"):
 					artists[artist["id"]] = artist
-			if len(page) < 100:
+			if len(page) < 100 or page_offset + 100 >= offset + max_results:
 				break
 			time.sleep(1)
 	return list(artists.values())[:max_results]
@@ -313,7 +327,7 @@ def artist_record(
 			else "Other"
 		),
 		"decade": metadata_decade or decade,
-		"region": metadata_region or region,
+		"region": canonical_region(metadata_region or region),
 		"image": f"static/images/artists/{image_name}",
 		"spotify_artist_id": spotify_artist["id"],
 	}
@@ -333,7 +347,7 @@ def main() -> None:
 		help="Maximum MusicBrainz artists to process",
 	)
 	parser.add_argument("--max-per-query", type=int, default=200)
-	parser.add_argument("--region", default="Macedonia", help="Fallback region")
+	parser.add_argument("--region", default="Unknown", help="Fallback city or region")
 	parser.add_argument("--decade", default="Unknown", help="Fallback decade")
 	parser.add_argument(
 		"--no-enrich", action="store_true", help="Skip MusicBrainz lookups"
@@ -342,6 +356,11 @@ def main() -> None:
 
 	IMAGE_DIR.mkdir(parents=True, exist_ok=True)
 	token = spotify_access_token()
+	existing_by_id = {
+		artist.get("spotify_artist_id"): artist
+		for artist in load_existing()
+		if artist.get("spotify_artist_id")
+	}
 	discovered: dict[str, dict[str, Any]] = {}
 	musicbrainz_by_spotify_id: dict[str, dict[str, Any]] = {}
 	if args.query:
@@ -352,31 +371,34 @@ def main() -> None:
 					discovered[artist["id"]] = artist
 	else:
 		print("Discovering all MusicBrainz artists associated with North Macedonia")
-		musicbrainz_matches = musicbrainz_artists(args.max_results)
-		spotify_ids = []
-		for match in musicbrainz_matches:
-			spotify_id = spotify_id_from_musicbrainz(match["id"])
-			if spotify_id:
-				spotify_ids.append(spotify_id)
-				musicbrainz_by_spotify_id[spotify_id] = match
-			time.sleep(1)
-		try:
-			spotify_matches = spotify_artist_details(token, spotify_ids)
-		except RuntimeError as error:
-			print(
-				f"Spotify batch artist lookup unavailable; using name search: {error}",
-				file=sys.stderr,
-			)
-			spotify_matches = spotify_artists_by_name(token, musicbrainz_matches)
-		for artist in spotify_matches:
-			if artist.get("id") and artist.get("name"):
-				discovered[artist["id"]] = artist
-
-	existing_by_id = {
-		artist.get("spotify_artist_id"): artist
-		for artist in load_existing()
-		if artist.get("spotify_artist_id")
-	}
+		musicbrainz_offset = 0
+		while len(
+			[artist_id for artist_id in discovered if artist_id not in existing_by_id]
+		) < args.max_results:
+			musicbrainz_matches = musicbrainz_artists(args.max_results, musicbrainz_offset)
+			if not musicbrainz_matches:
+				break
+			musicbrainz_offset += len(musicbrainz_matches)
+			spotify_ids = []
+			for match in musicbrainz_matches:
+				spotify_id = spotify_id_from_musicbrainz(match["id"])
+				if spotify_id:
+					spotify_ids.append(spotify_id)
+					musicbrainz_by_spotify_id[spotify_id] = match
+				time.sleep(1)
+			try:
+				spotify_matches = spotify_artist_details(token, spotify_ids)
+			except RuntimeError as error:
+				print(
+					f"Spotify batch artist lookup unavailable; using name search: {error}",
+					file=sys.stderr,
+				)
+				spotify_matches = spotify_artists_by_name(token, musicbrainz_matches)
+			for artist in spotify_matches:
+				if artist.get("id") and artist.get("name"):
+					discovered[artist["id"]] = artist
+			if len(musicbrainz_matches) < args.max_results:
+				break
 	for artist_id, spotify_artist in discovered.items():
 		musicbrainz_record = musicbrainz_by_spotify_id.get(artist_id)
 		existing_by_id[artist_id] = artist_record(

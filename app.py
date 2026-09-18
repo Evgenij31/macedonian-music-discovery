@@ -25,11 +25,16 @@ from models import Artist, User
 
 
 def canonical_region(value):
-    """Return one consistent label for country-level region values."""
+    """Return a city/region label, never a country-level value."""
     region = str(value or "").strip()
-    if region.casefold() in {"macedonia", "north macedonia"}:
-        return "North Macedonia"
-    return region
+    if region.casefold() in {
+        "macedonia",
+        "north macedonia",
+        "republic of macedonia",
+        "republic of north macedonia",
+    }:
+        return "Unknown"
+    return region or "Unknown"
 
 
 def sync_artist_table_schema():
@@ -59,7 +64,7 @@ with app.app_context():
     sync_artist_table_schema()
     
     # Check if the db is empty. If it is, seed it using artists.json
-    if Artist.query.count() == 0:
+    if Artist.query.count() == 0 and os.environ.get("SKIP_ARTIST_SEED") != "1":
         json_path = os.path.join(BASE_DIR, "artists.json")
         if os.path.exists(json_path):
             try:

@@ -5,15 +5,17 @@
     "decade": "2000s",
     "region": "Kruševo",
     "image": "static/images/artists/tose-proeski.jpg",
-    "spotify_artist_id": "0JCTMGwQbfZd84M5HE0TMS"
+    "spotify_artist_id": "0JCTMGwQbfZd84M5HE0TMS",
+    "description": "Toše Proeski was a popular Macedonian singer and songwriter often referred to as the Elvis Presley of the Balkans. He tragically died in a car crash at the height of his career in 2007."
   },
   {
     "name": "Leb I Sol",
     "genre": "Rock",
     "decade": "1970s",
-    "region": "North Macedonia",
+    "region": "Skopje",
     "image": "static/images/artists/leb-i-sol.jpg",
-    "spotify_artist_id": "5hNernryMZIWE1Nrygbxp0"
+    "spotify_artist_id": "5hNernryMZIWE1Nrygbxp0",
+    "description": "Leb i Sol is a legendary Macedonian rock band formed in Skopje in 1976. They are renowned for their unique blend of traditional Macedonian folk music and contemporary jazz-rock."
   },
   {
     "name": "Esma Redzepova",
@@ -21,31 +23,26 @@
     "decade": "1940s",
     "region": "Skopje",
     "image": "static/images/artists/esma-redzepova.jpg",
-    "spotify_artist_id": "3hqJ0OoW1ck5ET6lUyV0OQ"
+    "spotify_artist_id": "3hqJ0OoW1ck5ET6lUyV0OQ",
+    "description": "Esma Redzepova was a renowned Macedonian vocalist known globally as the Queen of Gypsies. Her illustrious career spanned decades, blending traditional Romani and Macedonian music."
   },
   {
     "name": "Duper",
     "genre": "Pop",
-    "decade": "2000s",
+    "decade": "2010s",
     "region": "Skopje",
     "image": "static/images/artists/duper-grupa.jpg",
-    "spotify_artist_id": "3MgabjdhjMZu4qF91PUvLw"
-  },
-  {
-    "name": "Marga Sol",
-    "genre": "Downtempo",
-    "decade": "Unknown",
-    "region": "North Macedonia",
-    "image": "static/images/artists/marga-sol.jpg",
-    "spotify_artist_id": "4y7BFiVRM23Sw8fUPcfXRI"
+    "spotify_artist_id": "3MgabjdhjMZu4qF91PUvLw",
+    "description": "Duper is a Macedonian alternative pop band formed in Skopje. They gained recognition with fresh melodic tracks on the local scene."
   },
   {
     "name": "Vlatko Stefanovski",
     "genre": "Rock",
-    "decade": "1950s",
-    "region": "Prilep",
+    "decade": "1970s",
+    "region": "Unknown",
     "image": "static/images/artists/vlatko-stefanovski.jpg",
-    "spotify_artist_id": "5ekFgfk58KqyjN2dIVcZ1V"
+    "spotify_artist_id": "5ekFgfk58KqyjN2dIVcZ1V",
+    "description": "Vlatko Stefanovski is a renowned Macedonian virtuosic guitarist, composer, and vocalist. He rose to fame as the leader of the influential rock band Leb i Sol."
   },
   {
     "name": "Egorythmia",
@@ -53,142 +50,322 @@
     "decade": "Unknown",
     "region": "Skopje",
     "image": "static/images/artists/egorythmia.jpg",
-    "spotify_artist_id": "4kxgUvOXcumvg81njRP7Ud"
+    "spotify_artist_id": "4kxgUvOXcumvg81njRP7Ud",
+    "description": "Egorythmia is a progressive psytrance project originating from Skopje, Macedonia. The artist is well-known in the international electronic music scene for his melodic and rhythmic sound."
   },
   {
     "name": "Slave Veljanovski",
-    "genre": "Other",
+    "genre": "Traditional",
     "decade": "Unknown",
-    "region": "Macedonia",
+    "region": "Unknown",
     "image": "static/images/artists/slave-veljanovski.jpg",
-    "spotify_artist_id": "5kLcnwc2WB13hc2T97gwak"
-  },
-  {
-    "name": "Gocho \"El Lápiz De Platino\"",
-    "genre": "Other",
-    "decade": "Unknown",
-    "region": "Puerto Rico",
-    "image": "static/images/artists/gocho-el-lapiz-de-platino.jpg",
-    "spotify_artist_id": "65VADjjC47dZbyOyrgNWJA"
+    "spotify_artist_id": "5kLcnwc2WB13hc2T97gwak",
+    "description": "Slave Veljanovski is a notable Macedonian traditional instrumentalist and musician known for playing the zurla. His work preserves the authentic folk music heritage of Macedonia."
   },
   {
     "name": "Kiril Džajkovski",
-    "genre": "Other",
-    "decade": "1960s",
+    "genre": "Electronic",
+    "decade": "1990s",
     "region": "Skopje",
     "image": "static/images/artists/kiril-dzajkovski.jpg",
-    "spotify_artist_id": "1Rn5tdbgbW4qHyffAaoMCY"
+    "spotify_artist_id": "1Rn5tdbgbW4qHyffAaoMCY",
+    "description": "Kiril Džajkovski is a prominent Macedonian musician and producer, widely recognized as a pioneer of electronic and dance music in the region. He is also known for his extensive work composing soundtracks for numerous films and theater productions."
   },
   {
     "name": "Usnija Redzepova",
-    "genre": "Other",
-    "decade": "Unknown",
-    "region": "Macedonia",
+    "genre": "Folk",
+    "decade": "1960s",
+    "region": "Unknown",
     "image": "static/images/artists/usnija-redzepova.jpg",
-    "spotify_artist_id": "6LENT7XGETMGGjWRyYgNLB"
-  },
-  {
-    "name": "ареал обитания",
-    "genre": "Other",
-    "decade": "Unknown",
-    "region": "Macedonia",
-    "image": "static/images/artists/artist.jpg",
-    "spotify_artist_id": "0gn8bgpcyfbDzUqMBg8EyO"
-  },
-  {
-    "name": "rich disease",
-    "genre": "Other",
-    "decade": "Unknown",
-    "region": "Macedonia",
-    "image": "static/images/artists/rich-disease.jpg",
-    "spotify_artist_id": "4jQpFmqd6D0rDJChVwKkM8"
+    "spotify_artist_id": "6LENT7XGETMGGjWRyYgNLB",
+    "description": "Usnija Redzepova was a renowned singer of Romani and Macedonian descent known for her powerful interpretations of traditional Balkan music. She built a successful career across the former Yugoslavia, particularly famous for her signature song \"Joj, Emine\"."
   },
   {
     "name": "Spirit Architect",
-    "genre": "Other",
-    "decade": "Unknown",
-    "region": "North Macedonia",
+    "genre": "Psychedelic Trance",
+    "decade": "2010s",
+    "region": "Skopje",
     "image": "static/images/artists/spirit-architect.jpg",
-    "spotify_artist_id": "3iwPiKLik6H24xHVkVzYV5"
+    "spotify_artist_id": "3iwPiKLik6H24xHVkVzYV5",
+    "description": "Spirit Architect is a Macedonian psytrance project known for its hypnotic and melodic soundscapes. The act has released multiple albums and tracks on prominent electronic music labels."
   },
   {
     "name": "Angel Dimov",
-    "genre": "Other",
+    "genre": "Folk",
     "decade": "Unknown",
-    "region": "Macedonia",
+    "region": "Unknown",
     "image": "static/images/artists/angel-dimov.jpg",
-    "spotify_artist_id": "3E9yVoz1zA8apnFDn0jAJk"
+    "spotify_artist_id": "3E9yVoz1zA8apnFDn0jAJk",
+    "description": "Angel Dimov is a known folk music artist associated with traditional regional styles. Further biographical details are currently unavailable."
   },
   {
     "name": "Djantrix",
-    "genre": "Other",
-    "decade": "Unknown",
-    "region": "Macedonia",
+    "genre": "Psychedelic Trance",
+    "decade": "2000s",
+    "region": "Skopje",
     "image": "static/images/artists/djantrix.jpg",
-    "spotify_artist_id": "4wxfp3hyKEu72DeU3Xoybf"
-  },
-  {
-    "name": "Yudhisthira",
-    "genre": "Electronic",
-    "decade": "Unknown",
-    "region": "North Macedonia",
-    "image": "static/images/artists/yudhisthira.jpg",
-    "spotify_artist_id": "4ky1T6mikzP88kx3NOGqaR"
+    "spotify_artist_id": "4wxfp3hyKEu72DeU3Xoybf",
+    "description": "Djantrix is a prominent Macedonian psychedelic trance producer and DJ known for his energetic and driving sound. He has released numerous tracks and albums on major psytrance labels."
   },
   {
     "name": "SuperHiks",
-    "genre": "Other",
-    "decade": "Unknown",
-    "region": "Macedonia",
+    "genre": "Ska Punk",
+    "decade": "1990s",
+    "region": "Unknown",
     "image": "static/images/artists/superhiks.jpg",
-    "spotify_artist_id": "0HlrnJ63cm4YeHPeFgjBOo"
+    "spotify_artist_id": "0HlrnJ63cm4YeHPeFgjBOo",
+    "description": "SuperHiks is a prominent Macedonian ska punk and alternative band formed in Skopje in 1994. Known for their energetic brass sections and eclectic style, they are a major fixture in the regional rock scene."
   },
   {
     "name": "ДНК",
-    "genre": "Other",
-    "decade": "Unknown",
-    "region": "Macedonia",
+    "genre": "Pop",
+    "decade": "2000s",
+    "region": "Skopje",
     "image": "static/images/artists/artist.jpg",
-    "spotify_artist_id": "0z6QiAAA0O67OEYilcfW5C"
-  },
-  {
-    "name": "616 undone.",
-    "genre": "Other",
-    "decade": "Unknown",
-    "region": "Macedonia",
-    "image": "static/images/artists/616-undone.jpg",
-    "spotify_artist_id": "2WusyVGjzENIOLkrrlf3vF"
+    "spotify_artist_id": "0z6QiAAA0O67OEYilcfW5C",
+    "description": "DNA is a popular Macedonian pop and R&B duo known for numerous hits and long-standing presence on the local music scene. Formed in Skopje, the group has released multiple successful albums and singles."
   },
   {
     "name": "Ferus Mustafov",
-    "genre": "Other",
-    "decade": "Unknown",
-    "region": "Macedonia",
+    "genre": "World",
+    "decade": "1970s",
+    "region": "Unknown",
     "image": "static/images/artists/ferus-mustafov.jpg",
-    "spotify_artist_id": "3F2MsXYrbyKYaFHkK8hNHJ"
-  },
-  {
-    "name": "Sejo Kalač",
-    "genre": "Other",
-    "decade": "1960s",
-    "region": "Macedonia",
-    "image": "static/images/artists/sejo-kalac.jpg",
-    "spotify_artist_id": "5NZ8u64cqkuoan7WVU537t"
+    "spotify_artist_id": "3F2MsXYrbyKYaFHkK8hNHJ",
+    "description": "Ferus Mustafov was a renowned Romani-Macedonian clarinet and saxophone player, celebrated as one of the finest Balkan folk musicians. His virtuosic performances bridged traditional Romani and Macedonian music styles."
   },
   {
     "name": "Muharem Serbezovski",
-    "genre": "Other",
-    "decade": "Unknown",
-    "region": "Macedonia",
+    "genre": "Folk",
+    "decade": "1970s",
+    "region": "Skopje",
     "image": "static/images/artists/muharem-serbezovski.jpg",
-    "spotify_artist_id": "7ElbAlEMu3q6o0m9YrQ9gV"
+    "spotify_artist_id": "7ElbAlEMu3q6o0m9YrQ9gV",
+    "description": "Muharem Serbezovski is a renowned Macedonian singer and writer known for his significant contributions to Romani and Balkan folk music. He began his prolific career in the late 1960s and became famous for numerous traditional and original hits."
   },
   {
-    "name": "Fobia",
+    "name": "Veljanov",
+    "genre": "Dark Wave",
+    "decade": "1980s",
+    "region": "Unknown",
+    "image": "static/images/artists/veljanov.jpg",
+    "spotify_artist_id": "4dCdxnPvpJpMRz38hS5xWx",
+    "description": "Veljanov is a Macedonian-born German musician best known as the vocalist of the dark wave band Deine Lakaien. He has also pursued a successful solo career releasing numerous neoclassical and dark wave albums."
+  },
+  {
+    "name": "Dimitar Dodovski",
     "genre": "Other",
     "decade": "Unknown",
-    "region": "Macedonia",
-    "image": "static/images/artists/fobia.jpg",
-    "spotify_artist_id": "3SqzxvGCKGJ9PYKXXPwjQS"
+    "region": "Unknown",
+    "image": "static/images/artists/dimitar-dodovski.jpg",
+    "spotify_artist_id": "00kSxXDKGafeM1T8EktuFF",
+    "description": "Dimitar Dodovski is a Macedonian musician known for his contributions to the local music scene. Further biographical details remain undocumented."
+  },
+  {
+    "name": "Atriohm",
+    "genre": "Dark Psytrance",
+    "decade": "2000s",
+    "region": "Unknown",
+    "image": "static/images/artists/atriohm.jpg",
+    "spotify_artist_id": "6kv03c4uwitYETlNAaQIGL",
+    "description": "Atriohm is a Macedonian dark psytrance music project created by brothers Leon and Goran Atanasovski. They are a prominent act within the international psytrance scene, releasing music through Parvati Records."
+  },
+  {
+    "name": "Анастасија Костадиновска",
+    "genre": "Other",
+    "decade": "Unknown",
+    "region": "Unknown",
+    "image": "static/images/artists/artist.jpg",
+    "spotify_artist_id": "54LR5pQGNFZPUuFGh5nB4T",
+    "description": "Anastasija Kostadinovska is a Macedonian artist."
+  },
+  {
+    "name": "Blisargon Demogorgon",
+    "genre": "Electronic",
+    "decade": "Unknown",
+    "region": "Unknown",
+    "image": "static/images/artists/blisargon-demogorgon.jpg",
+    "spotify_artist_id": "5ZRAfc9SGb1WkTBQdzNTNW",
+    "description": "Blisargon Demogorgon is a Macedonian psytrance music project known for its psychedelic electronic sound. The artist has been active in the global darkpsy and hi-tech electronic music scene."
+  },
+  {
+    "name": "Mihail Parushev",
+    "genre": "Jazz",
+    "decade": "Unknown",
+    "region": "Unknown",
+    "image": "static/images/artists/mihail-parushev.jpg",
+    "spotify_artist_id": "3juDH1hhV83fM28WvK6Lrq",
+    "description": "Mihail Parushev is a prominent Macedonian drummer and percussionist known for his work in jazz and world music. He has collaborated with numerous renowned artists and ensembles across the Balkans."
+  },
+  {
+    "name": "Димитър Лозанов",
+    "genre": "Folk",
+    "decade": "Unknown",
+    "region": "Unknown",
+    "image": "static/images/artists/artist.jpg",
+    "spotify_artist_id": "2BpRz4VAEnlLOcAWfg1GDI",
+    "description": "Dimitar Lozanov is a traditional musician associated with Macedonian folk heritage. Further biographical details remain to be established."
+  },
+  {
+    "name": "Duke Bojadziev",
+    "genre": "Contemporary",
+    "decade": "1990s",
+    "region": "Skopje",
+    "image": "static/images/artists/duke-bojadziev.jpg",
+    "spotify_artist_id": "502fD1fdYlaVpW3nYHa5nE",
+    "description": "Duke Bojadziev is a renowned Macedonian composer, pianist, and producer known for his cinematic and contemporary music. He has built an international career spanning film scoring, jazz, and classical crossover."
+  },
+  {
+    "name": "Arhangel",
+    "genre": "Rock",
+    "decade": "1990s",
+    "region": "Skopje",
+    "image": "static/images/artists/arhangel.jpg",
+    "spotify_artist_id": "7Ed6HtcARp9ahxFVxfit7o",
+    "description": "Arhangel is a prominent Macedonian rock band formed in Skopje in 1989. They are known for their distinctive sound and significant impact on the alternative music scene in North Macedonia."
+  },
+  {
+    "name": "PMG Kolektiv",
+    "genre": "Electropop",
+    "decade": "1990s",
+    "region": "Skopje",
+    "image": "static/images/artists/pmg-kolektiv.jpg",
+    "spotify_artist_id": "5ucBHw1wBCSAGNDL2GAtiZ",
+    "description": "PMG Kolektiv is a prominent Macedonian electropop and indie band formed in Skopje during the 1990s. They are a foundational act of the modern independent music scene in North Macedonia."
+  },
+  {
+    "name": "Džambo Aguševi Orchestra",
+    "genre": "World",
+    "decade": "Unknown",
+    "region": "Unknown",
+    "image": "static/images/artists/dzambo-agusevi-orchestra.jpg",
+    "spotify_artist_id": "1985CKRPGyaghXT3pRAnhn",
+    "description": "The Džambo Aguševi Orchestra is a renowned brass band from North Macedonia known for its vibrant blend of traditional Balkan, Gypsy, and modern music. Led by trumpeter Džambo Agušev, the ensemble has gained international acclaim through energetic performances and numerous albums."
+  },
+  {
+    "name": "Boban Ristevski",
+    "genre": "Other",
+    "decade": "Unknown",
+    "region": "Unknown",
+    "image": "static/images/artists/boban-ristevski.jpg",
+    "spotify_artist_id": "7J7VWYJp3RFm0OcNjUNuXf",
+    "description": "Boban Ristevski is a Macedonian musical artist known for his contributions to the local music scene. Further biographical details remain unavailable."
+  },
+  {
+    "name": "Memorija",
+    "genre": "Rock",
+    "decade": "1980s",
+    "region": "Unknown",
+    "image": "static/images/artists/memorija.jpg",
+    "spotify_artist_id": "5rJO6jlUBGefFeS03TaxIX",
+    "description": "Memorija is a prominent Macedonian rock band formed in Skopje during the 1980s. They are well-known for their significant contribution to the local rock and pop-rock music scene."
+  },
+  {
+    "name": "Тамара Тодевска",
+    "genre": "Pop",
+    "decade": "2000s",
+    "region": "Unknown",
+    "image": "static/images/artists/artist.jpg",
+    "spotify_artist_id": "3RGTR7vXmVAJbUIAQfMG0F",
+    "description": "Tamara Todevska is a prominent Macedonian pop singer known for her powerful vocals and numerous hits. She represented North Macedonia in the Eurovision Song Contest 2019, achieving the country's best result to date."
+  },
+  {
+    "name": "Encephalopaticys",
+    "genre": "Death Metal",
+    "decade": "1990s",
+    "region": "Gevgelija",
+    "image": "static/images/artists/encephalopaticys.jpg",
+    "spotify_artist_id": "2c497KH9vuQLtec9Bh9NQG",
+    "description": "Encephalopaticys is a Macedonian death metal band formed in Gevgelija during the 1990s. They are known for their contribution to the extreme underground music scene in the country."
+  },
+  {
+    "name": "Dragan Dautovski Quartet",
+    "genre": "World",
+    "decade": "1990s",
+    "region": "Skopje",
+    "image": "static/images/artists/dragan-dautovski-quartet.jpg",
+    "spotify_artist_id": "5dXns4IdDzppTpedi3PyIJ",
+    "description": "The Dragan Dautovski Quartet is a renowned Macedonian traditional music ensemble founded by composer and multi-instrumentalist Dragan Dautovski. The group is celebrated for blending authentic Balkan folk sounds with contemporary arrangements using traditional instruments like the kaval."
+  },
+  {
+    "name": "Synthesis",
+    "genre": "Traditional Folk",
+    "decade": "1990s",
+    "region": "Skopje",
+    "image": "static/images/artists/synthesis.jpg",
+    "spotify_artist_id": "2dkAbwBLa20UmpE0iWnl7v",
+    "description": "Synthesis is a renowned Macedonian traditional folk and world music ensemble formed in Skopje in 1995. They creatively blend authentic ethno sounds with modern jazz and ambient elements using traditional instruments."
+  },
+  {
+    "name": "Goran Trajkoski",
+    "genre": "Rock",
+    "decade": "1980s",
+    "region": "Skopje",
+    "image": "static/images/artists/goran-trajkoski.jpg",
+    "spotify_artist_id": "6Dxojnm80P4XzxEpM4C6be",
+    "description": "Goran Trajkoski is a prominent Macedonian musician known for his work with influential alternative and dark wave bands like Aporea, Mizar, and Anastasia. He is a key figure in the development of the Macedonian independent music scene."
+  },
+  {
+    "name": "Born For Slaughter",
+    "genre": "Punk",
+    "decade": "2010s",
+    "region": "Skopje",
+    "image": "static/images/artists/born-for-slaughter.jpg",
+    "spotify_artist_id": "0LlN8zlXP1UvXtGX3DE86E",
+    "description": "Born For Slaughter is a punk band originating from Skopje, active during the 2010s. They are part of the local underground music scene."
+  },
+  {
+    "name": "Bastion",
+    "genre": "Electronic",
+    "decade": "1980s",
+    "region": "Skopje",
+    "image": "static/images/artists/bastion.jpg",
+    "spotify_artist_id": "5L3w2NRLkMFmvL9MnDBDWE",
+    "description": "Bastion was a pioneering Yugoslav and Macedonian synth-pop and electronic band formed in Skopje during the early 1980s. The group featured prominent musicians including Kiril Dzajkovski and Milco Mancevski."
+  },
+  {
+    "name": "Karolina Gočeva",
+    "genre": "Pop",
+    "decade": "1990s",
+    "region": "Unknown",
+    "image": "static/images/artists/karolina-goceva.jpg",
+    "spotify_artist_id": "6IR6VTwDZdbfEJS9vTh6B2",
+    "description": "Karolina Gočeva is a prominent Macedonian pop singer known for her successful regional music career and multiple appearances at the Eurovision Song Contest."
+  },
+  {
+    "name": "Martin Gjakonovski",
+    "genre": "Jazz",
+    "decade": "Unknown",
+    "region": "Unknown",
+    "image": "static/images/artists/martin-gjakonovski.jpg",
+    "spotify_artist_id": "5v054lI3qAL9w60moMfo61",
+    "description": "Martin Gjakonovski is a prominent Macedonian jazz contrabassist who has built a successful international career, particularly in Germany. He is known for his collaborations with numerous European jazz legends."
+  },
+  {
+    "name": "F.A.M.E.'S. Macedonian Radio Symphonic Orchestra",
+    "genre": "Classical",
+    "decade": "Unknown",
+    "region": "Skopje",
+    "image": "static/images/artists/f-a-m-e-s-macedonian-radio-symphonic-orchestra.jpg",
+    "spotify_artist_id": "6980fuZj8ltWQnl7QDpFhH",
+    "description": "F.A.M.E.'S. Macedonian Radio Symphonic Orchestra is a prominent musical ensemble based in Skopje, North Macedonia. They specialize in orchestral recordings for film, television, and contemporary music projects."
+  },
+  {
+    "name": "Robotek",
+    "genre": "Glitch",
+    "decade": "1970s",
+    "region": "Skopje",
+    "image": "static/images/artists/robotek.jpg",
+    "spotify_artist_id": "79wpm07kyChGG31TgojWNx",
+    "description": "Robotek is a music project associated with the electronic and glitch music scene originating from Skopje. Their work reflects innovative electronic soundscapes within the region."
+  },
+  {
+    "name": "Primitive Dread",
+    "genre": "Crossover Thrash",
+    "decade": "2020s",
+    "region": "Ohrid",
+    "image": "static/images/artists/primitive-dread.jpg",
+    "spotify_artist_id": "72vpYC7EZe9HdjiBk1JitZ",
+    "description": "Primitive Dread is a crossover thrash band originating from Ohrid, active in the 2020s."
   }
 ]
