@@ -24,6 +24,14 @@ db.init_app(app)
 from models import Artist, User 
 
 
+def canonical_region(value):
+    """Return one consistent label for country-level region values."""
+    region = str(value or "").strip()
+    if region.casefold() in {"macedonia", "north macedonia"}:
+        return "North Macedonia"
+    return region
+
+
 def sync_artist_table_schema():
     """Add any missing Artist columns to an existing SQLite table."""
     inspector = inspect(db.engine)
@@ -63,7 +71,7 @@ with app.app_context():
                         name=data.get("name"),
                         genre=data.get("genre"),
                         decade=data.get("decade"),
-                        region=data.get("region"),
+                        region=canonical_region(data.get("region")),
                         image_url=data.get("image"),  # Maps 'image' from JSON to 'image_url' in DB
                         description=data.get("description", ""),
                         spotify_artist_id=data.get("spotify_artist_id"),
@@ -131,10 +139,14 @@ def catch_all(path):
 # Route to serve main HTML page
 @app.route("/")
 def home():
+    regions = {
+        canonical_region(region)
+        for region in get_distinct_values(Artist.region)
+    }
     filters = {
         "genres": get_distinct_values(Artist.genre),
         "decades": get_distinct_values(Artist.decade),
-        "regions": get_distinct_values(Artist.region),
+        "regions": sorted(regions, key=str.casefold),
     }
 
     return render_template("index.html", active_page="home", filters=filters)
@@ -261,7 +273,7 @@ def edit_artist(artist_id):
         artist.name = values["name"]
         artist.genre = values["genre"]
         artist.decade = values["decade"]
-        artist.region = values["region"]
+        artist.region = canonical_region(values["region"])
         artist.description = request.form.get("description", "").strip()
         artist.image_url = request.form.get("image_url", "").strip()
         artist.spotify_artist_id = request.form.get("spotify_artist_id", "").strip()
@@ -327,7 +339,7 @@ def get_artists():
                 "name": artist.name,
                 "genre": artist.genre,
                 "decade": artist.decade,
-                "region": artist.region,
+                "region": canonical_region(artist.region),
                 "image": artist.image_url, 
                 "description": artist.description
             })

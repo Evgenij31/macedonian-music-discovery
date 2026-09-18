@@ -122,9 +122,11 @@ document.addEventListener("DOMContentLoaded", () => {
             <a href="../artist/${artist.id}" target="_self" rel="noopener noreferrer">
                 <img src="${artist.image}" alt="${artist.name}">
                 <h2>${artist.name}</h2>
-                <p><strong>Genre:</strong> ${artist.genre}</p>
-                <p><strong>Decade:</strong> ${artist.decade}</p>
-                <p><strong>Region:</strong> ${artist.region}</p>
+                <div class="card-meta" aria-label="Artist metadata">
+                    <span class="metadata-pill"><strong>Genre</strong><span>${artist.genre}</span></span>
+                    <span class="metadata-pill"><strong>Decade</strong><span>${artist.decade}</span></span>
+                    <span class="metadata-pill"><strong>Region</strong><span>${artist.region}</span></span>
+                </div>
             </a>
             `;
 

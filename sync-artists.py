@@ -9,7 +9,7 @@ import unicodedata
 from pathlib import Path
 from typing import Any
 
-from app import app, db
+from app import app, canonical_region, db
 from models import Artist
 
 
@@ -37,7 +37,7 @@ def update_artist(artist: Artist, record: dict[str, Any]) -> bool:
         "name": record.get("name"),
         "genre": record.get("genre"),
         "decade": record.get("decade"),
-        "region": record.get("region"),
+        "region": canonical_region(record.get("region")),
         "image_url": record.get("image"),
         "spotify_artist_id": record.get("spotify_artist_id"),
     }
@@ -88,7 +88,7 @@ def sync_artists(dry_run: bool = False) -> tuple[int, int, int]:
                 name=name,
                 genre=str(record.get("genre") or "Other"),
                 decade=str(record.get("decade") or "Unknown"),
-                region=str(record.get("region") or "Macedonia"),
+                region=canonical_region(record.get("region") or "Macedonia"),
                 image_url=record.get("image"),
                 description=record.get("description", ""),
                 spotify_artist_id=spotify_id or None,
