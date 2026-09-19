@@ -12,6 +12,8 @@ class Artist(db.Model):
     image_url = db.Column(db.String(255), nullable=True)
     description = db.Column(db.Text, nullable=True)  # <-- Make sure this line exists!
     spotify_artist_id = db.Column(db.String(100), nullable=True)
+    popularity = db.Column(db.Integer, nullable=True, default=0)
+    editorial_priority = db.Column(db.Integer, nullable=False, default=0)
 
     def to_dict(self):
         return {
@@ -23,6 +25,8 @@ class Artist(db.Model):
             "image_url": self.image_url,
             "description": self.description,
             "spotify_artist_id": self.spotify_artist_id,
+            "popularity": self.popularity or 0,
+            "editorial_priority": self.editorial_priority or 0,
         }
 
 class User(db.Model):

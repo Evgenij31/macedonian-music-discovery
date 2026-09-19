@@ -28,6 +28,7 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parent
 ARTISTS_FILE = ROOT / "artists.json"
+KNOWN_ARTISTS_FILE = ROOT / "known-artists.json"
 IMAGE_DIR = ROOT / "static" / "images" / "artists"
 SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token"
 SPOTIFY_ARTISTS_URL = "https://api.spotify.com/v1/artists"
@@ -213,6 +214,52 @@ def spotify_artists_by_name(
 	return list(artists.values())
 
 
+def normalized_artist_name(value: str) -> str:
+	normalized = unicodedata.normalize("NFKD", value)
+	ascii_value = normalized.encode("ascii", "ignore").decode("ascii")
+	return re.sub(r"[^a-z0-9]+", " ", ascii_value.casefold()).strip()
+
+
+def load_known_artists() -> list[dict[str, Any]]:
+	if not KNOWN_ARTISTS_FILE.exists():
+		return []
+	with KNOWN_ARTISTS_FILE.open("r", encoding="utf-8") as file:
+		data = json.load(file)
+	return data if isinstance(data, list) else []
+
+
+def spotify_known_artists(
+	token: str, known_artists: list[dict[str, Any]]
+) -> tuple[dict[str, dict[str, Any]], dict[str, dict[str, Any]]]:
+	"""Find curated artists without accepting an unrelated Spotify result."""
+	discovered: dict[str, dict[str, Any]] = {}
+	metadata: dict[str, dict[str, Any]] = {}
+	for known in known_artists:
+		name = str(known.get("name", "")).strip()
+		if not name:
+			continue
+		try:
+			results = spotify_artists(token, f'artist:"{name}"', 5)
+		except RuntimeError as error:
+			print(f"Spotify search failed for curated artist {name}: {error}", file=sys.stderr)
+			continue
+		match = next(
+			(
+				artist
+				for artist in results
+				if normalized_artist_name(artist.get("name", ""))
+				== normalized_artist_name(name)
+			),
+			None,
+		)
+		if not match or not match.get("id"):
+			print(f"Could not match curated artist exactly: {name}", file=sys.stderr)
+			continue
+		discovered[match["id"]] = match
+		metadata[match["id"]] = known
+	return discovered, metadata
+
+
 def musicbrainz_metadata(name: str) -> tuple[str | None, str | None]:
 	params = urlencode({"query": f'artist:"{name}"', "fmt": "json", "limit": 1})
 	request = Request(
@@ -297,6 +344,7 @@ def artist_record(
 	decade: str,
 	enrich: bool,
 	musicbrainz_record: dict[str, Any] | None = None,
+	known_record: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
 	name = spotify_artist["name"].strip()
 	metadata_region, metadata_decade, musicbrainz_genre = (
@@ -330,6 +378,8 @@ def artist_record(
 		"region": canonical_region(metadata_region or region),
 		"image": f"static/images/artists/{image_name}",
 		"spotify_artist_id": spotify_artist["id"],
+		"popularity": int(spotify_artist.get("popularity") or 0),
+		"editorial_priority": int((known_record or {}).get("editorial_priority") or 0),
 	}
 
 
@@ -363,6 +413,10 @@ def main() -> None:
 	}
 	discovered: dict[str, dict[str, Any]] = {}
 	musicbrainz_by_spotify_id: dict[str, dict[str, Any]] = {}
+	known_by_spotify_id: dict[str, dict[str, Any]] = {}
+	known_discovered, known_metadata = spotify_known_artists(token, load_known_artists())
+	discovered.update(known_discovered)
+	known_by_spotify_id.update(known_metadata)
 	if args.query:
 		for query in args.query:
 			print(f"Searching Spotify: {query}")
@@ -401,13 +455,19 @@ def main() -> None:
 				break
 	for artist_id, spotify_artist in discovered.items():
 		musicbrainz_record = musicbrainz_by_spotify_id.get(artist_id)
-		existing_by_id[artist_id] = artist_record(
+		record = artist_record(
 			spotify_artist,
 			args.region,
 			args.decade,
 			not args.no_enrich,
 			musicbrainz_record,
+			known_by_spotify_id.get(artist_id),
 		)
+		if artist_id in existing_by_id and artist_id not in known_by_spotify_id:
+			record["editorial_priority"] = existing_by_id[artist_id].get(
+				"editorial_priority", 0
+			)
+		existing_by_id[artist_id] = record
 		print(f"Saved: {spotify_artist['name']}")
 
 	save_artists(list(existing_by_id.values()))

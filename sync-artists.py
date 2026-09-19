@@ -213,6 +213,8 @@ def update_artist(artist: Artist, record: dict[str, Any]) -> bool:
         "image_url": record.get("image"),
         "description": record.get("description", UNKNOWN),
         "spotify_artist_id": record.get("spotify_artist_id"),
+        "popularity": int(record.get("popularity") or 0),
+        "editorial_priority": int(record.get("editorial_priority") or 0),
     }
     for field, value in fields.items():
         if value is not None and value != getattr(artist, field):
@@ -274,6 +276,8 @@ def sync_artists(
                 image_url=record.get("image"),
                 description=record.get("description", UNKNOWN),
                 spotify_artist_id=spotify_id or None,
+                popularity=int(record.get("popularity") or 0),
+                editorial_priority=int(record.get("editorial_priority") or 0),
             )
             db.session.add(artist)
             inserted += 1

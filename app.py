@@ -80,6 +80,8 @@ with app.app_context():
                         image_url=data.get("image"),  # Maps 'image' from JSON to 'image_url' in DB
                         description=data.get("description", ""),
                         spotify_artist_id=data.get("spotify_artist_id"),
+                        popularity=int(data.get("popularity") or 0),
+                        editorial_priority=int(data.get("editorial_priority") or 0),
                     )
                     db.session.add(new_artist)
                 db.session.commit()
@@ -282,6 +284,12 @@ def edit_artist(artist_id):
         artist.description = request.form.get("description", "").strip()
         artist.image_url = request.form.get("image_url", "").strip()
         artist.spotify_artist_id = request.form.get("spotify_artist_id", "").strip()
+        artist.editorial_priority = max(
+            0, int(request.form.get("editorial_priority", 0) or 0)
+        )
+        artist.popularity = min(
+            100, max(0, int(request.form.get("popularity", 0) or 0))
+        )
 
         db.session.commit()
         flash(f"{artist.name} was updated successfully.")
@@ -336,7 +344,11 @@ def delete_artist(artist_id):
 @app.route("/api/artists")
 def get_artists():
     try:
-        artists_query = Artist.query.all()
+        artists_query = Artist.query.order_by(
+            Artist.editorial_priority.desc(),
+            Artist.popularity.desc(),
+            Artist.name.asc(),
+        ).all()
         artists_list = []
         for artist in artists_query:
             artists_list.append({
@@ -346,7 +358,9 @@ def get_artists():
                 "decade": artist.decade,
                 "region": canonical_region(artist.region),
                 "image": artist.image_url, 
-                "description": artist.description
+                "description": artist.description,
+                "popularity": artist.popularity or 0,
+                "editorial_priority": artist.editorial_priority or 0,
             })
         return jsonify(artists_list)
     except Exception as e:

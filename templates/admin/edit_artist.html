@@ -93,6 +93,25 @@
             value="{{ artist.spotify_artist_id or '' }}"
           />
 
+          <label for="editorial_priority">Editorial priority:</label>
+          <input
+            type="number"
+            id="editorial_priority"
+            name="editorial_priority"
+            min="0"
+            value="{{ artist.editorial_priority or 0 }}"
+          />
+
+          <label for="popularity">Spotify popularity:</label>
+          <input
+            type="number"
+            id="popularity"
+            name="popularity"
+            min="0"
+            max="100"
+            value="{{ artist.popularity or 0 }}"
+          />
+
           <div class="admin-edit-actions">
             <a href="{{ url_for('admin') }}" class="admin-cancel-btn">Cancel</a>
             <button type="submit">Save Changes</button>

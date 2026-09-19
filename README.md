@@ -18,6 +18,20 @@ ID, downloads images as JPEG files into `static/images/artists`, and merges
 records into `artists.json`. Use `--query "..."` to run optional Spotify
 keyword searches instead, or `--max-results 5000` to process more artists.
 
+The scraper also reads `known-artists.json`, a manually reviewed seed list for
+nationally recognizable and historically important artists. Each seed is
+searched directly in Spotify and must have an exact normalized name match, so
+an unrelated search result is not silently added. The seed's
+`editorial_priority` places it ahead of long-tail discoveries. Edit this file
+to expand or correct the list; it is kept separate from generated
+`artists.json`.
+
+Spotify artist popularity is stored with each record and is used as the
+secondary ordering signal. The home API sorts by editorial priority, Spotify
+popularity, and then artist name. Spotify popularity reflects Spotify activity,
+so curated priority remains important for older artists and audiences using
+other platforms.
+
 ## Sync artists to the database
 
 The sync uses Google Gemini to validate each artist before persistence. Create a
@@ -56,7 +70,8 @@ Both commands call Gemini. `--dry-run` reports the proposed enrichment and
 database changes but writes neither `artists.json` nor SQLite. The normal sync
 atomically updates `artists.json` first, then matches artists by Spotify ID or
 normalized name and updates name, genre, decade, region, image path, biography,
-and Spotify ID in the database.
+Spotify ID, popularity, and editorial priority in the database. Existing SQLite
+databases receive the new columns automatically on application startup.
 
 Requests are paced at five seconds apart by default, keeping the sync below the
 free-tier limit of 15 requests per minute. Change the delay with either
