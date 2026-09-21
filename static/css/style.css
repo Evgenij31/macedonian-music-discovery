@@ -408,12 +408,54 @@ h1 span {
   margin-bottom: 1.5rem;
 }
 
-.filter-group h3 {
+.filter-group summary {
+  position: relative;
+  cursor: pointer;
   font-size: 1rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
   color: var(--mint-light);
   border-bottom: 1px solid var(--indigo-muted);
   padding-bottom: 0.3rem;
+  list-style: none;
+}
+
+.filter-group summary::after {
+  content: "+";
+  position: absolute;
+  right: 0.2rem;
+  transition: transform 0.4s ease;
+}
+
+.filter-group[open] summary {
+  margin-bottom: 0.5rem;
+}
+
+.filter-group[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.filter-options {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s ease;
+}
+
+.filter-options>* {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.filter-group[open] .filter-options {
+  grid-template-rows: 1fr;
+}
+
+.filter-group summary::marker {
+  color: var(--mint-light);
+}
+
+.filter-group summary:focus-visible {
+  outline: 2px solid var(--mint-light);
+  outline-offset: 3px;
 }
 
 .filter-group label {
@@ -513,7 +555,6 @@ h1 span {
   border-radius: 8px;
   padding: 1rem;
   position: relative;
-  /* Crucial for absolute positioned AI hover overlay later */
   overflow: hidden;
   transition: transform 0.3s, border-color 0.3s;
 }
@@ -586,8 +627,64 @@ h1 span {
   text-decoration: none;
   color: inherit;
   display: block;
-  height: 100%;
   width: 100%;
+}
+
+.favorite-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 1rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--indigo-muted);
+  border-radius: 999px;
+  background: var(--dark-purple);
+  color: var(--mint-light);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(5, 9, 20, 0.25);
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease,
+    box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.favorite-button:hover,
+.favorite-button:focus-visible {
+  transform: translateY(-1px);
+  border-color: var(--mint-light);
+  background: rgba(111, 255, 233, 0.28);
+  color: var(--mint-light);
+  box-shadow: 0 0 0 3px rgba(111, 255, 233, 0.18),
+    0 8px 18px rgba(5, 9, 20, 0.28);
+  outline: none;
+}
+
+.favorite-button.is-favorite {
+  border-color: var(--mint-light);
+  background: var(--mint-light);
+  color: var(--deep-void);
+  box-shadow: 0 6px 18px rgba(111, 255, 233, 0.24);
+}
+
+.favorite-button span {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.favorites-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 1rem 4rem;
+}
+
+.favorites-intro {
+  margin-top: 0.6rem;
+  opacity: 0.72;
+}
+
+.favorites-grid {
+  margin-top: 2rem;
 }
 
 .status-msg {
@@ -761,7 +858,7 @@ h1 span {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.75rem;
-  margin-bottom: 1.5rem;
+  margin-block: 1.5rem;
 }
 
 .artist-meta div {
@@ -806,6 +903,14 @@ h1 span {
   transform: translateY(-2px);
   border-color: var(--mint-light);
   background: rgba(111, 255, 233, 0.08);
+}
+
+#spotify-embed {
+  width: 100%;
+  height: 460px;
+  border: none;
+  border-radius: 18px;
+  box-shadow: 0 0 5px var(--indigo-muted);
 }
 
 /* admin page css */

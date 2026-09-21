@@ -41,35 +41,41 @@
           />
         </div>
 
-        <div class="filter-group">
-          <h3>Genre</h3>
-          {% for genre in filters.genres %}
-          <label
-            ><input type="checkbox" name="genre" value="{{ genre }}" /> {{ genre
-            }}</label
-          >
-          {% endfor %}
-        </div>
+        <details class="filter-group">
+          <summary>Genre</summary>
+          <div class="filter-options">
+            {% for genre in filters.genres %}
+            <label
+              ><input type="checkbox" name="genre" value="{{ genre }}" /> {{
+              genre }}</label
+            >
+            {% endfor %}
+          </div>
+        </details>
 
-        <div class="filter-group">
-          <h3>Decade</h3>
-          {% for decade in filters.decades %}
-          <label
-            ><input type="checkbox" name="decade" value="{{ decade }}" /> {{
-            decade }}</label
-          >
-          {% endfor %}
-        </div>
+        <details class="filter-group">
+          <summary>Decade</summary>
+          <div class="filter-options">
+            {% for decade in filters.decades %}
+            <label
+              ><input type="checkbox" name="decade" value="{{ decade }}" /> {{
+              decade }}</label
+            >
+            {% endfor %}
+          </div>
+        </details>
 
-        <div class="filter-group">
-          <h3>Region</h3>
-          {% for region in filters.regions %}
-          <label
-            ><input type="checkbox" name="region" value="{{ region }}" /> {{
-            region }}</label
-          >
-          {% endfor %}
-        </div>
+        <details class="filter-group">
+          <summary>Region</summary>
+          <div class="filter-options">
+            {% for region in filters.regions %}
+            <label
+              ><input type="checkbox" name="region" value="{{ region }}" /> {{
+              region }}</label
+            >
+            {% endfor %}
+          </div>
+        </details>
       </aside>
 
       <main class="content-area">

@@ -7,8 +7,59 @@
     <link rel="stylesheet" href="/static/css/style.css" />
   </head>
   <body class="favorites-page">
-    {% include "partials/navbar.html" %}
+    {% include "partials/navbar.html" %} {% with messages =
+    get_flashed_messages() %} {% if messages %}
+    <div class="flash-messages">
+      {% for message in messages %}
+      <p>{{ message }}</p>
+      {% endfor %}
+    </div>
+    {% endif %} {% endwith %}
 
-    <main>This is the favorites page</main>
+    <main class="favorites-shell">
+      <div class="content-heading">
+        <p class="eyebrow">Your collection</p>
+        <h1>Favorite Artists</h1>
+        <p class="favorites-intro">The artists you want to return to.</p>
+      </div>
+
+      <section class="artist-grid favorites-grid" aria-live="polite">
+        {% if favorite_artists %} {% for artist in favorite_artists %} {% set
+        artist_image = artist.image_url | replace('static/', '') if
+        artist.image_url else 'images/person-placeholder.png' %}
+        <article class="artist-card" data-artist-id="{{ artist.id }}">
+          <a href="{{ url_for('artist', artist_id=artist.id) }}">
+            <img
+              src="{{ url_for('static', filename=artist_image) }}"
+              alt="{{ artist.name }}"
+            />
+            <h2>{{ artist.name }}</h2>
+            <div class="card-meta" aria-label="Artist metadata">
+              <span class="metadata-pill"
+                ><strong>Genre</strong><span>{{ artist.genre }}</span></span
+              >
+              <span class="metadata-pill"
+                ><strong>Decade</strong><span>{{ artist.decade }}</span></span
+              >
+              <span class="metadata-pill"
+                ><strong>Region</strong><span>{{ artist.region }}</span></span
+              >
+            </div>
+          </a>
+          <button
+            class="favorite-button is-favorite"
+            type="button"
+            data-favorite-id="{{ artist.id }}"
+            aria-pressed="true"
+          >
+            <span aria-hidden="true">♥</span> Favorite
+          </button>
+        </article>
+        {% endfor %} {% else %}
+        <p class="status-msg">You have not saved any artists yet.</p>
+        {% endif %}
+      </section>
+    </main>
+    <script src="/static/js/app.js"></script>
   </body>
 </html>

@@ -21,7 +21,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
 # import models since models no longer imports app.py
-from models import Artist, User 
+from models import Artist, Favorite, User
 
 
 def canonical_region(value):
@@ -118,6 +118,19 @@ def admin_required(view):
     return wrapped_view
 
 
+def login_required(view):
+    @wraps(view)
+    def wrapped_view(*args, **kwargs):
+        if "user_id" not in session:
+            if request.path.startswith("/api/"):
+                return jsonify({"error": "Authentication required"}), 401
+            flash("Please log in to manage your favorite artists.")
+            return redirect(url_for("login", next=request.path))
+        return view(*args, **kwargs)
+
+    return wrapped_view
+
+
 def delete_artist_image(artist_id, image_url):
     """Delete an artist's unshared local image, if it is stored in our catalog."""
     original_image_url = image_url
@@ -163,8 +176,19 @@ def about():
     return render_template("about.html", active_page="about")
 
 @app.route("/favorites")
+@login_required
 def favorites():
-    return render_template("favorites.html", active_page="favorites")
+    favorite_artists = (
+        Artist.query.join(Favorite)
+        .filter(Favorite.user_id == session["user_id"])
+        .order_by(Artist.name.asc())
+        .all()
+    )
+    return render_template(
+        "favorites.html",
+        active_page="favorites",
+        favorite_artists=favorite_artists,
+    )
 
 @app.route("/login")
 def login():
@@ -242,7 +266,18 @@ def logout():
 @app.route("/artist/<int:artist_id>")
 def artist(artist_id):
     artist = Artist.query.get_or_404(artist_id)
-    return render_template("artist.html", artist=artist, active_page="artist")
+    is_favorite = bool(
+        session.get("user_id")
+        and Favorite.query.filter_by(
+            user_id=session["user_id"], artist_id=artist.id
+        ).first()
+    )
+    return render_template(
+        "artist.html",
+        artist=artist,
+        is_favorite=is_favorite,
+        active_page="artist",
+    )
 
 @app.route("/favicon.ico")
 def favicon():
@@ -349,6 +384,11 @@ def get_artists():
             Artist.popularity.desc(),
             Artist.name.asc(),
         ).all()
+        user_id = session.get("user_id")
+        favorite_ids = {
+            favorite.artist_id
+            for favorite in Favorite.query.filter_by(user_id=user_id).all()
+        } if user_id else set()
         artists_list = []
         for artist in artists_query:
             artists_list.append({
@@ -361,11 +401,31 @@ def get_artists():
                 "description": artist.description,
                 "popularity": artist.popularity or 0,
                 "editorial_priority": artist.editorial_priority or 0,
+                "is_favorite": artist.id in favorite_ids,
             })
         return jsonify(artists_list)
     except Exception as e:
         print(f"Database error: {e}")
         return jsonify({"error": "Could not fetch artists from database"}), 500
+
+
+@app.route("/api/favorites/<int:artist_id>", methods=["POST"])
+@login_required
+def toggle_favorite(artist_id):
+    artist = Artist.query.get_or_404(artist_id)
+    favorite = Favorite.query.filter_by(
+        user_id=session["user_id"], artist_id=artist.id
+    ).first()
+
+    if favorite:
+        db.session.delete(favorite)
+        is_favorite = False
+    else:
+        db.session.add(Favorite(user_id=session["user_id"], artist_id=artist.id))
+        is_favorite = True
+
+    db.session.commit()
+    return jsonify({"artist_id": artist.id, "is_favorite": is_favorite})
     
 if __name__ == "__main__":
     # This block only runs during local development (python app.py)

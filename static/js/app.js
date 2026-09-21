@@ -20,6 +20,47 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    document.querySelectorAll("[data-favorite-id]").forEach(button => {
+        button.addEventListener("click", async event => {
+            event.preventDefault();
+            event.stopPropagation();
+
+            const response = await fetch(`/api/favorites/${button.dataset.favoriteId}`, {
+                method: "POST",
+            });
+
+            if (response.status === 401) {
+                window.location.href = "/login";
+                return;
+            }
+
+            if (!response.ok) {
+                return;
+            }
+
+            const data = await response.json();
+            updateFavoriteButton(button, data.is_favorite);
+
+            if (button.closest(".favorites-grid") && !data.is_favorite) {
+                button.closest(".artist-card").remove();
+                if (!document.querySelector(".favorites-grid .artist-card")) {
+                    document.querySelector(".favorites-grid").innerHTML =
+                        '<p class="status-msg">You have not saved any artists yet.</p>';
+                }
+            }
+        });
+    });
+
+    function updateFavoriteButton(button, isFavorite) {
+        button.classList.toggle("is-favorite", isFavorite);
+        button.setAttribute("aria-pressed", String(isFavorite));
+        button.innerHTML = `<span aria-hidden="true">${isFavorite ? "♥" : "♡"}</span> ${isFavorite ? "Favorite" : "Add to favorites"}`;
+    }
+
+    if (!gridContainer || !searchInput || !clearButton || !activeFiltersText) {
+        return;
+    }
+
     const filterState = {
         search: "",
         genre: new Set(),
@@ -129,9 +170,28 @@ document.addEventListener("DOMContentLoaded", () => {
                     <span class="metadata-pill"><strong>Region</strong><span>${artist.region}</span></span>
                 </div>
             </a>
+            <button class="favorite-button ${artist.is_favorite ? "is-favorite" : ""}" type="button" data-favorite-id="${artist.id}" aria-pressed="${artist.is_favorite}">
+                <span aria-hidden="true">${artist.is_favorite ? "♥" : "♡"}</span> ${artist.is_favorite ? "Favorite" : "Add to favorites"}
+            </button>
             `;
 
             gridContainer.appendChild(card);
+            const favoriteButton = card.querySelector("[data-favorite-id]");
+            favoriteButton.addEventListener("click", async event => {
+                event.preventDefault();
+                event.stopPropagation();
+                const response = await fetch(`/api/favorites/${artist.id}`, { method: "POST" });
+                if (response.status === 401) {
+                    window.location.href = "/login";
+                    return;
+                }
+                if (!response.ok) {
+                    return;
+                }
+                const data = await response.json();
+                artist.is_favorite = data.is_favorite;
+                updateFavoriteButton(favoriteButton, data.is_favorite);
+            });
         });
     }
 

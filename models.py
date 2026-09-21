@@ -14,6 +14,9 @@ class Artist(db.Model):
     spotify_artist_id = db.Column(db.String(100), nullable=True)
     popularity = db.Column(db.Integer, nullable=True, default=0)
     editorial_priority = db.Column(db.Integer, nullable=False, default=0)
+    favorites = db.relationship(
+        "Favorite", back_populates="artist", cascade="all, delete-orphan"
+    )
 
     def to_dict(self):
         return {
@@ -37,9 +40,23 @@ class User(db.Model):
     email = db.Column(db.String(150), nullable=False, unique=True)
     password = db.Column(db.String(255), nullable=False)
     user_type = db.Column(db.String(20), nullable=False)
+    favorites = db.relationship(
+        "Favorite", back_populates="user", cascade="all, delete-orphan"
+    )
 
     def set_password(self, password):
         self.password = generate_password_hash(password, method='pbkdf2:sha256')
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
+
+
+class Favorite(db.Model):
+    __tablename__ = "favorites"
+    __table_args__ = (db.UniqueConstraint("user_id", "artist_id"),)
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    artist_id = db.Column(db.Integer, db.ForeignKey("artists.id"), nullable=False)
+    user = db.relationship("User", back_populates="favorites")
+    artist = db.relationship("Artist", back_populates="favorites")

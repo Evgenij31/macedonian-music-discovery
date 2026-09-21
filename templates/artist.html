@@ -30,6 +30,16 @@
             artist yet." }}
           </p>
 
+          <button
+            class="favorite-button {{ 'is-favorite' if is_favorite else '' }}"
+            type="button"
+            data-favorite-id="{{ artist.id }}"
+            aria-pressed="{{ 'true' if is_favorite else 'false' }}"
+          >
+            <span aria-hidden="true">{{ '♥' if is_favorite else '♡' }}</span>
+            {{ 'Favorite' if is_favorite else 'Add to favorites' }}
+          </button>
+
           <dl class="artist-meta" aria-label="Artist details">
             <div>
               <dt>Genre</dt>
@@ -47,6 +57,7 @@
         </div>
 
         <iframe
+          id="spotify-embed"
           data-testid="embed-iframe"
           style="border-radius: 12px"
           src="https://open.spotify.com/embed/artist/{{ artist.spotify_artist_id }}?utm_source=generator&theme=0&si=5cff2c98cd0a45de"
