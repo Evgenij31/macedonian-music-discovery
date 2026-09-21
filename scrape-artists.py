@@ -25,8 +25,11 @@ from urllib.request import Request, urlopen
 
 from PIL import Image
 
+from env_loader import load_env_file
+
 
 ROOT = Path(__file__).resolve().parent
+load_env_file(ROOT / ".env")
 ARTISTS_FILE = ROOT / "artists.json"
 KNOWN_ARTISTS_FILE = ROOT / "known-artists.json"
 IMAGE_DIR = ROOT / "static" / "images" / "artists"

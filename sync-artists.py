@@ -15,10 +15,12 @@ from typing import Any
 os.environ.setdefault("SKIP_ARTIST_SEED", "1")
 
 from app import app, canonical_region, db
+from env_loader import load_env_file
 from models import Artist
 
 
 ROOT = Path(__file__).resolve().parent
+load_env_file(ROOT / ".env")
 ARTISTS_FILE = ROOT / "artists.json"
 DEFAULT_GEMINI_MODEL = "gemini-3.5-flash-lite"
 DEFAULT_REQUEST_INTERVAL_SECONDS = 5.0

@@ -93,6 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         renderArtists(filteredArtists);
+        checkArtistImages(filteredArtists);
         renderActiveFilters(filteredArtists.length);
     }
 
@@ -131,6 +132,26 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
 
             gridContainer.appendChild(card);
+        });
+    }
+
+    function checkArtistImages(artistsList) {
+        artistsList.forEach(artist => {
+            const img = new Image();
+            img.src = artist.image;
+
+            img.onerror = () => {
+                // Replace with placeholder image on error
+                const artistCard = Array.from(gridContainer.children).find(card => {
+                    return card.querySelector("h2").textContent === artist.name;
+                });
+
+                if (artistCard) {
+                    const imgElement = artistCard.querySelector("img");
+                    imgElement.src = "/static/images/person-placeholder.png";
+                    imgElement.alt = "Placeholder image for missing artist image";
+                }
+            };
         });
     }
 
