@@ -6,6 +6,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const clearButton = document.querySelector(".clear-btn");
     const activeFiltersText = document.querySelector(".active-tags-bar span");
     const filterInputs = document.querySelectorAll('input[type="checkbox"][name]');
+    const pagination = document.querySelector(".pagination");
+    const paginationStatus = document.querySelector(".pagination-status");
+    const paginationButtons = document.querySelectorAll("[data-page-action]");
 
     if (userMenuWrapper && userMenuButton) {
         userMenuButton.addEventListener("click", () => {
@@ -69,6 +72,8 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     let allArtists = [];
+    let currentPage = 1;
+    const artistsPerPage = 12;
 
     fetch("/api/artists")
         .then(response => {
@@ -88,6 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     searchInput.addEventListener("input", event => {
         filterState.search = event.target.value.trim().toLowerCase();
+        currentPage = 1;
         renderFilteredArtists();
     });
 
@@ -105,6 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 filterState[name].delete(value);
             }
 
+            currentPage = 1;
             renderFilteredArtists();
         });
     });
@@ -120,7 +127,16 @@ document.addEventListener("DOMContentLoaded", () => {
             input.checked = false;
         });
 
+        currentPage = 1;
         renderFilteredArtists();
+    });
+
+    paginationButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            currentPage += button.dataset.pageAction === "next" ? 1 : -1;
+            renderFilteredArtists();
+            gridContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
     });
 
     function renderFilteredArtists() {
@@ -133,8 +149,14 @@ document.addEventListener("DOMContentLoaded", () => {
             return matchesSearch && matchesGenre && matchesDecade && matchesRegion;
         });
 
-        renderArtists(filteredArtists);
-        checkArtistImages(filteredArtists);
+        const totalPages = Math.max(1, Math.ceil(filteredArtists.length / artistsPerPage));
+        currentPage = Math.min(currentPage, totalPages);
+        const pageStart = (currentPage - 1) * artistsPerPage;
+        const pagedArtists = filteredArtists.slice(pageStart, pageStart + artistsPerPage);
+
+        renderArtists(pagedArtists);
+        checkArtistImages(pagedArtists);
+        renderPagination(filteredArtists.length, totalPages);
         renderActiveFilters(filteredArtists.length);
     }
 
@@ -192,6 +214,27 @@ document.addEventListener("DOMContentLoaded", () => {
                 artist.is_favorite = data.is_favorite;
                 updateFavoriteButton(favoriteButton, data.is_favorite);
             });
+        });
+    }
+
+    function renderPagination(resultCount, totalPages) {
+        if (!pagination) {
+            return;
+        }
+
+        const shouldShowPagination = resultCount > artistsPerPage;
+        pagination.hidden = !shouldShowPagination;
+
+        if (!shouldShowPagination) {
+            return;
+        }
+
+        paginationStatus.textContent = `Page ${currentPage} of ${totalPages}`;
+        paginationButtons.forEach(button => {
+            button.disabled =
+                button.dataset.pageAction === "previous"
+                    ? currentPage === 1
+                    : currentPage === totalPages;
         });
     }
 
