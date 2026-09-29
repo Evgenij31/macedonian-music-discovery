@@ -541,7 +541,7 @@ h1 span {
   cursor: pointer;
 }
 
-/* Responsive Micro Layout: Artist Cards Grid */
+/* Artist Cards Grid */
 .artist-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
