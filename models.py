@@ -10,7 +10,7 @@ class Artist(db.Model):
     decade = db.Column(db.String(20), nullable=False)
     region = db.Column(db.String(50), nullable=False)
     image_url = db.Column(db.String(255), nullable=True)
-    description = db.Column(db.Text, nullable=True)  # <-- Make sure this line exists!
+    description = db.Column(db.Text, nullable=True)
     spotify_artist_id = db.Column(db.String(100), nullable=True)
     popularity = db.Column(db.Integer, nullable=True, default=0)
     editorial_priority = db.Column(db.Integer, nullable=False, default=0)
