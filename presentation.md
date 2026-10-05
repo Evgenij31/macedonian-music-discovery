@@ -335,20 +335,8 @@ It is not just a simple website; it is a complete, data-driven application with 
 
 ---
 
-## 16. Short presentation speech
-
-"This project is called Macedonian Music Discovery. It is a web application designed to help users discover Macedonian artists and music in a more organized and engaging way. The website allows users to search for artists, filter them by genre, decade, and region, and save their favorites. The project combines HTML, CSS, JavaScript, Python, Flask, SQLite, and external APIs in order to create a functional and modern digital platform. I also implemented data processing and validation so the catalog is more complete and reliable. The main idea behind this project is to promote Macedonian culture by using technology to present music in a more accessible and visually appealing format."
-
----
-
-## 17. Final conclusion
+## 16. Final conclusion
 
 This project shows how web design, software engineering, and digital culture can work together in one application. It demonstrates practical programming skills, data organization, database design, authentication, and interactive UI development.
 
 Overall, Macedonian Music Discovery is more than just a class project. It is a functional web platform that combines technology with culture, creativity, and problem-solving. It is a strong example of what can be built through modern web development and good design thinking.
-
----
-
-## 18. Closing sentence for the presentation
-
-"In the end, this project shows that technology can be used not only for business or entertainment, but also to preserve, discover, and promote local culture."
